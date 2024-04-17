@@ -26,7 +26,7 @@ def backgroundApp(top):
 
 if __name__ == '__main__':
 
-    top = tk.Tk()
+    top = tk.Tk( )
     top.title("Weather App")
     top.state('zoomed')
     top.resizable(height=False , width=False)
