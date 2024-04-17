@@ -43,10 +43,6 @@ canvas.pack(fill=tk.BOTH, expand=True)
 # Chemin de l'image d'arrière-plan
 image_path = ".\\static\\landscape-forest-trees-mist-wallpaper-preview.jpg"  # Remplacez par le chemin de votre image
 
-# Chargez et affichez l'image d'arrière-plan
 load_background_image(canvas, image_path)
 
-# Ajoutez d'autres widgets au canevas si nécessaire
-
-# Exécutez la boucle principale
 root.mainloop()
