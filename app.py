@@ -10,7 +10,7 @@ import tkintermapview
 
 
 def backgroundApp(root):
-    image_path = "./static/bg.jpeg"
+    image_path = "./static/bgMain.psd"
     image = Image.open(image_path)
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
