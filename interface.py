@@ -31,39 +31,39 @@ barFrame = ctk.CTkFrame(root,width=500 , height=60  )
 
 #search bar
 searchBar = ctk.CTkEntry(root ,width=400 , height=50 ,
-                         placeholder_text="Location" , font=('Poppins Medium' ,17 ) ,
+                         placeholder_text="Location" , font=('Mountain' ,17 ) ,
                           fg_color='#344D59' , bg_color='#132530' , corner_radius=30 )
-searchBar.place(x=720, y=83)
+searchBar.place(x=738, y=86)
 
 image_path = "./static/loupe.png"
 button_image = ctk.CTkImage(Image.open(image_path), size=(35, 35))
 buttonSearchBar = ctk.CTkButton(root, text="Confirmer", image=button_image ,
                                 command=getLocation , width=50 , height=50 , compound="right"
-                                ,font=('Poppins Medium' ,20 )  , anchor="se"
+                                ,font=('Mountain' ,20 )  , anchor="se"
                                 ,fg_color='#004d4d' , hover_color="#001a1a" ,bg_color='#132530', corner_radius=30
                                )
-buttonSearchBar.place(y=83, x=1150)
+buttonSearchBar.place(y=86, x=1168)
 
 #data city
 
-villeFrame = ctk.CTkFrame(root ,  fg_color='#135D66' , width=230 , height=100  ,bg_color='transparent' )
-villeFrame.place(x=1160 ,y =200 )
+villeFrame = ctk.CTkFrame(root ,  fg_color='#132530' ,  height=100  ,bg_color='#132530' )
+villeFrame.place(x=1188 ,y =235 )
 
 
 
-villeLabel  = ctk.CTkLabel(villeFrame , font=('Poppins Medium' ,40 ) , text="vile" , fg_color='transparent',justify='right')
+villeLabel  = ctk.CTkLabel(villeFrame , font=('Mountain' ,40 ) , text="vile" , fg_color='transparent',justify='right')
 villeLabel.place(relx=0.93, rely=0.35, anchor='e')
-paysLabel  = ctk.CTkLabel(villeFrame , font=('Poppins Medium' ,20 ) , text="Pays" , fg_color='transparent' , justify='right')
+paysLabel  = ctk.CTkLabel(villeFrame , font=('Mountain' ,20 ) , text="Pays" , fg_color='transparent' , justify='right')
 paysLabel.place(relx=0.93, rely=0.75, anchor='e')
 
 #date time
 
-clockFrame = ctk.CTkFrame(root , width=500 , height=170 , fg_color="#77B0AA")
-clockFrame.place(x=145 , y = 150)
-clockLabel = ctk.CTkLabel(clockFrame ,text="", font=('Mountain'  ,55 ) )
+clockFrame = ctk.CTkFrame(root , width=500 , height=170 , fg_color="#132530" , bg_color='#132530')
+clockFrame.place(x=150 , y = 180)
+clockLabel = ctk.CTkLabel(clockFrame ,text="", font=('Mountain'  ,66 ) )
 clockLabel.place(relx=0.5, rely=0.3, anchor='center')
 
-dateLabel = ctk.CTkLabel(clockFrame,text="",  font=('Mountain' ,45 ) )
+dateLabel = ctk.CTkLabel(clockFrame,text="",  font=('Mountain' ,55 ) )
 dateLabel.place(relx=0.5, rely=0.75, anchor='center')
 updatetimer()
 
