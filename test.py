@@ -1,29 +1,32 @@
-import tkinter as tk
+import customtkinter as ctk
 
-def create_transparent_frame():
-    # Créez une fenêtre principale (root)
-    root = tk.Tk()
-    root.title("Frame Transparent")
+def main():
+    # Create a CTk root window
+    root = ctk.CTk()
+    root.title("Transparent Frame Example")
 
-    # Définissez la couleur de fond de la fenêtre principale (par exemple, blanc)
-    root.config(bg='white')
+    # Set the root window size to 400x400
+    root.geometry("400x400")
 
-    # Créez un frame (cadre) et placez-le dans la fenêtre principale
-    frame = tk.Frame(root)
+    # Create a parent frame with a custom background color (e.g., light gray)
+    parent_frame = ctk.CTkFrame(root, bg_color="light gray")
+    parent_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
-    # Définissez la couleur de fond du frame pour correspondre à celle de la fenêtre principale
-    # Cela donnera l'illusion de transparence
-    frame.config(bg=root.cget('bg'))
+    # Create a child frame with the same background color as the parent frame
+    # to achieve a transparent effect
+    child_frame = ctk.CTkFrame(parent_frame, fg_color="light gray", bg_color="light gray")
+    child_frame.place(relx=0.25, rely=0.25, relwidth=0.5, relheight=0.5)
 
-    # Ajoutez des widgets au frame (par exemple, un label)
-    label = tk.Label(frame, text="Frame transparent", bg="white", fg="black")
-    label.pack(padx=20, pady=20)
+    # Add a label inside the child frame
+    label = ctk.CTkLabel(child_frame, text="Transparent Frame", fg_color="light gray", bg_color="light gray")
+    label.pack(pady=20)
 
-    # Placez le frame dans la fenêtre principale
-    frame.pack(padx=10, pady=10, fill='both', expand=True)
+    # Add a button inside the child frame
+    button = ctk.CTkButton(child_frame, text="Click Me")
+    button.pack(pady=20)
 
-    # Exécutez la boucle principale
+    # Start the CTk application
     root.mainloop()
 
-# Appeler la fonction pour créer un frame transparent
-create_transparent_frame()
+if __name__ == "__main__":
+    main()
