@@ -15,7 +15,7 @@ def backgroundApp(root):
 
     # Redimensionner l'image pour correspondre à la taille spécifiée
     if image.width != specified_width or image.height != specified_height:
-        image = image.resize((specified_width, specified_height), Image.Resampling.LANCZOS)
+        image = image.resize((specified_width , specified_height), Image.Resampling.LANCZOS)
 
     # Convertir l'image PIL en image Tkinter
     background_image = ImageTk.PhotoImage(image)
