@@ -9,7 +9,7 @@ from PIL import Image, ImageTk
 import tkintermapview
 
 
-def backgroundApp(root):
+def backgroundApp(root ):
     image_path = "./static/bg.psd"
     image = Image.open(image_path)
     screen_width = root.winfo_screenwidth()
