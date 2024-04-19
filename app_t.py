@@ -8,7 +8,7 @@ import customtkinter as ctk
 from PIL import Image, ImageTk
 import tkintermapview
 def backgroundApp(root):
-    image_path = "./static/bgr.psd"
+    image_path = "./static/bg.psd"
     image = Image.open(image_path)
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
@@ -25,6 +25,7 @@ top = tk.Tk()
 top.title("Weather informations")
 #top.attributes('-fullscreen', True)
 top.geometry("1200x600")
+top.resizable(0,0)
 icon_path = "./static/loupe.png"
 icon_image = tk.PhotoImage(file=icon_path)
 

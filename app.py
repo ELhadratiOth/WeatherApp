@@ -29,7 +29,8 @@ def backgroundApp(root ):
 if __name__ == '__main__':
     root= tk.Tk( )
     root.title("Weather App")
-    root.state('zoomed')
-    root.resizable(height=False , width=False)
+    root.geometry("1200x600")
+
+    # root.resizable(height=False , width=False)
     backgroundApp(root)
     root.mainloop()
