@@ -64,7 +64,7 @@ clockLabel = ctk.CTkLabel(clockFrame ,text="", font=('Mountain'  ,66 ) )
 clockLabel.place(relx=0.5, rely=0.3, anchor='center')
 
 dateLabel = ctk.CTkLabel(clockFrame,text="",  font=('Mountain' ,55 ) )
-dateLabel.place(relx=0.5, rely=0.75, anchor='center')
+dateLabel.place(relx=0.5, rely=0.75, anchor='center' )
 updatetimer()
 
 
