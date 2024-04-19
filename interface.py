@@ -21,8 +21,9 @@ def updatetimer():
 
 root = tk.Tk()
 root.title("Weather App")
-root.state('zoomed')
-root.resizable(height=False, width=False)
+#root.state('zoomed')
+root.attributes('-fullscreen', True)
+#root.resizable(height=False, width=False)
 app.backgroundApp(root)
 
 

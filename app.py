@@ -20,16 +20,3 @@ def backgroundApp(top):
     background_label = tk.Label(top, image=background_image)
     background_label.place(x=0, y=0, relwidth=1, relheight=1)
     top.background_image = background_image
-
-top = tk.Tk()
-top.title("Weather App")
-top.state('zoomed')
-top.resizable(height=False , width=False)
-
-backgroundApp(top)
-
-
-
-
-# Exécutez la boucle principale
-top.mainloop()
