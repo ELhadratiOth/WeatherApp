@@ -23,12 +23,11 @@ def backgroundApp(root):
 # Initialisation de la fenêtre
 top = tk.Tk()
 top.title("Weather informations")
-top.geometry("1200x600")
-#top.attributes('-fullscreen', True)
-icon_path = "./static/loupe.png"
-icon_image = tk.PhotoImage(file=icon_path)
+top.attributes('-fullscreen', True)
+# icon_path = "./static/loupe.png"
+# icon_image = tk.PhotoImage(file=icon_path)
 
-top.iconphoto(True, icon_image)
+# top.iconphoto(True, icon_image)
 # Appliquer l'image de fond
 backgroundApp(top)
 frame1 = tk.Frame(top, bg="#132530", width=340, height=300)

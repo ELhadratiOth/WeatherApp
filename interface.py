@@ -3,6 +3,7 @@ import customtkinter as ctk
 from PIL import Image, ImageTk
 import app
 import time
+import function
 
 
 
@@ -18,12 +19,17 @@ def updatetimer():
     exactDate= time.strftime("%A . %B . %d , %Y")
     dateLabel.configure(text=exactDate)
     root.after(1000,updatetimer)
+def ImagAdd(img , size):
+    my_image = ctk.CTkImage(light_image=Image.open(img),
+                                      size=(size, size))
+    return my_image
+
+
 
 root = tk.Tk()
 root.title("Weather App")
-#root.state('zoomed')
-root.attributes('-fullscreen', True)
-#root.resizable(height=False, width=False)
+root.geometry("1200x600")
+root.resizable(height=False, width=False)
 app.backgroundApp(root)
 
 
@@ -65,8 +71,30 @@ clockLabel = ctk.CTkLabel(clockFrame ,text="", font=('Mountain'  ,66 ) )
 clockLabel.place(relx=0.5, rely=0.3, anchor='center')
 
 dateLabel = ctk.CTkLabel(clockFrame,text="",  font=('Mountain' ,55 ) )
-dateLabel.place(relx=0.5, rely=0.75, anchor='center')
+dateLabel.place(relx=0.5, rely=0.75, anchor='center'  )
 updatetimer()
+
+dailyFrame = ctk.CTkFrame(root , width=1320 , height=260 , bg_color='#132530' , fg_color="#132530")
+dailyFrame.place(x=115 , y=510 )
+currentW = ctk.CTkFrame(dailyFrame , width=300 , height=250 , bg_color='#132530', fg_color="#132530"  )
+currentW.place(x=10 ,y=5)
+lastT , img  = function.outputCurrentT()
+print(lastT , img)
+
+
+my_image=ImagAdd('./static/3.png' , 100)
+currentWlabel1 = ctk.CTkLabel(currentW , image=my_image, text="" , width=200 , height=200 ,compound="left"  , bg_color='#987654'  ,font=('Mountain' ,50 )  )
+currentWlabel1.place(relx=0.3, rely=0.5, anchor='center')
+
+frameTT = ctk.CTkFrame(currentW , width=100 , height= 100)
+frameTT.place(relx=0.4, rely=0.26)
+currentWlabel2 = ctk.CTkLabel(frameTT , text=lastT ,compound="left"  , bg_color='#700570'  ,font=('Mountain' ,50 )  )
+currentWlabel2.place(relx=0.65, rely=0.35, anchor='center')
+
+currentWlabel3 = ctk.CTkLabel(frameTT , text="o"  ,compound="left"  , bg_color='#707070'  ,font=('Mountain' ,20 )  )
+currentWlabel3.place(relx=0.75 , rely=0.3, anchor='center')
+
+
 
 
 
