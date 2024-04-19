@@ -10,8 +10,8 @@ def backgroundApp(root):
     image = Image.open(image_path)
 
     # Définir la taille spécifiée pour la fenêtre
-    specified_width = 1200
-    specified_height = 600
+    specified_width = 1300
+    specified_height = 700
 
     # Redimensionner l'image pour correspondre à la taille spécifiée
     if image.width != specified_width or image.height != specified_height:
@@ -33,7 +33,7 @@ def backgroundApp(root):
 if __name__ == '__main__':
     root = tk.Tk()
     root.title("Weather App")
-    root.geometry("1200x600")  # Définir la géométrie à respecter
+    root.geometry("1300x700")  # Définir la géométrie à respecter
 
     # Appeler la fonction pour configurer l'arrière-plan
     backgroundApp(root)
