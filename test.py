@@ -1,42 +1,38 @@
-import tkinter as tk
-from PIL import Image, ImageTk
+from collections import Counter
 
 
-def backgroundApp(root):
-    # Chemin de l'image à utiliser comme arrière-plan
-    image_path = "./static/bg.psd"
+def unique_list_of_size_six_with_indices(lst):
+    count = Counter(lst)  # Compter le nombre d'occurrences de chaque élément
+    unique_values = list(count.keys())  # Obtenir les valeurs uniques
 
-    # Charger l'image
-    image = Image.open(image_path)
+    result = []  # Liste résultante
+    indices = []  # Indices des éléments utilisés
 
-    # Définir la taille spécifiée pour la fenêtre
-    specified_width = 1300
-    specified_height = 700
+    # Créer une nouvelle liste avec les éléments uniques jusqu'à ce qu'elle atteigne la taille de 6
+    for index, value in enumerate(lst):
+        if len(result) < 6:
+            if value in unique_values:
+                result.append(value)
+                indices.append(index)
+                unique_values.remove(value)  # Retirer la valeur de la liste des valeurs uniques
+        else:
+            break
 
-    # Redimensionner l'image pour correspondre à la taille spécifiée
-    if image.width != specified_width or image.height != specified_height:
-        image = image.resize((specified_width , specified_height), Image.Resampling.LANCZOS)
+    # Si la liste résultante a moins de 6 éléments, compléter avec les valeurs restantes de la liste d'origine
+    while len(result) < 6:
+        for index, value in enumerate(lst):
+            if len(result) < 6:
+                result.append(value)
+                indices.append(index)
 
-    # Convertir l'image PIL en image Tkinter
-    background_image = ImageTk.PhotoImage(image)
-
-    # Créer un Label pour afficher l'image
-    background_label = tk.Label(root, image=background_image)
-
-    # Placer le label pour occuper toute la fenêtre (x=0, y=0) et l'étendre selon la largeur et hauteur relatives
-    background_label.place(x=0, y=0, relwidth=1, relheight=1)
-
-    # Conserver une référence à l'image pour éviter que l'image soit supprimée par le garbage collector
-    root.background_image = background_image
+    return result, indices
 
 
-if __name__ == '__main__':
-    root = tk.Tk()
-    root.title("Weather App")
-    root.geometry("1300x700")  # Définir la géométrie à respecter
+# Liste principale
+main_list = [3, 80, 61, 80, 3, 3, 3, 3, 3, 3, 99, 80, 80, 3, 61, 61, 80, 80, 3, 61, 3, 3, 3, 3, 3]
 
-    # Appeler la fonction pour configurer l'arrière-plan
-    backgroundApp(root)
+# Obtenir la liste unique de 6 éléments et les indices correspondants
+unique_six_list, used_indices = unique_list_of_size_six_with_indices(main_list)
 
-    # Démarrer la boucle principale de l'interface graphique
-    root.mainloop()
+print("Liste unique de taille 6:", unique_six_list)
+print("Indices des éléments utilisés:", used_indices)
