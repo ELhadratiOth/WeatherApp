@@ -4,7 +4,7 @@ from PIL import Image, ImageTk
 
 def backgroundApp(root):
     # Chemin de l'image à utiliser comme arrière-plan
-    image_path = "./static/bg.psd"
+    image_path = "./static/bcopie.psd"
 
     # Charger l'image
     image = Image.open(image_path)

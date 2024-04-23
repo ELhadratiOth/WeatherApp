@@ -105,8 +105,8 @@ def outputCurrentT():
     return str(lastT).split('.')[0] , img
 
 
-# lastT , img = outputCurrentT()
-# print(lastT , img)
+#lastT , img = outputCurrentT()
+#print(lastT , img)
 
 
 
