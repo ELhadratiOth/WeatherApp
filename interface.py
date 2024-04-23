@@ -24,11 +24,13 @@ def ImagAdd(img , size):
                                       size=(size, size))
     return my_image
 
-
+latitude, longitude , region , city = function.actuall_dataCompli()
+lastT , img  = function.outputCurrentT(latitude, longitude)
+dataDic=function.setImg(latitude, longitude)
 
 root = tk.Tk()
 root.title("Weather App")
-root.geometry("1200x600")
+root.geometry("1300x700")
 root.resizable(height=False, width=False)
 app.backgroundApp(root)
 
@@ -37,63 +39,162 @@ app.backgroundApp(root)
 barFrame = ctk.CTkFrame(root,width=500 , height=60  )
 
 #search bar
-searchBar = ctk.CTkEntry(root ,width=400 , height=50 ,
+searchBar = ctk.CTkEntry(root ,width=350 , height=45 ,
                          placeholder_text="Location" , font=('Mountain' ,17 ) ,
                           fg_color='#344D59' , bg_color='#132530' , corner_radius=30 )
-searchBar.place(x=738, y=86)
+searchBar.place(x=630, y=76)
 
 image_path = "./static/loupe.png"
-button_image = ctk.CTkImage(Image.open(image_path), size=(35, 35))
+button_image = ImagAdd(image_path , 35)
 buttonSearchBar = ctk.CTkButton(root, text="Confirmer", image=button_image ,
-                                command=getLocation , width=50 , height=50 , compound="right"
-                                ,font=('Mountain' ,20 )  , anchor="se"
+                                command=getLocation , width=30 , height=45 , compound="right"
+                                ,font=('Mountain' ,25 )  , anchor="se"
                                 ,fg_color='#004d4d' , hover_color="#001a1a" ,bg_color='#132530', corner_radius=30
                                )
-buttonSearchBar.place(y=86, x=1168)
+buttonSearchBar.place(y=76, x=994)
 
 #data city
 
-villeFrame = ctk.CTkFrame(root ,  fg_color='#132530' ,  height=100  ,bg_color='#132530' )
-villeFrame.place(x=1188 ,y =235 )
-
-
-
-villeLabel  = ctk.CTkLabel(villeFrame , font=('Mountain' ,40 ) , text="vile" , fg_color='transparent',justify='right')
+villeFrame = ctk.CTkFrame(root ,  fg_color='#132530' ,  height=80 , width=130 ,bg_color='#132530' )
+villeFrame.place(x=1045 ,y =197 )
+villeLabel  = ctk.CTkLabel(villeFrame , font=('Mountain' ,40 ) , text=city , fg_color='transparent',justify='right')
 villeLabel.place(relx=0.93, rely=0.35, anchor='e')
-paysLabel  = ctk.CTkLabel(villeFrame , font=('Mountain' ,20 ) , text="Pays" , fg_color='transparent' , justify='right')
+paysLabel  = ctk.CTkLabel(villeFrame , font=('Mountain' ,20 ) , text=region , fg_color='transparent' , justify='right')
 paysLabel.place(relx=0.93, rely=0.75, anchor='e')
 
 #date time
 
-clockFrame = ctk.CTkFrame(root , width=500 , height=170 , fg_color="#132530" , bg_color='#132530')
-clockFrame.place(x=150 , y = 180)
-clockLabel = ctk.CTkLabel(clockFrame ,text="", font=('Mountain'  ,66 ) )
+clockFrame = ctk.CTkFrame(root , width=420 , height=150 , fg_color="#132530" , bg_color='#132530')
+clockFrame.place(x=130 , y = 144)
+clockLabel = ctk.CTkLabel(clockFrame ,text="", font=('Mountain'  ,56 ) )
 clockLabel.place(relx=0.5, rely=0.3, anchor='center')
 
-dateLabel = ctk.CTkLabel(clockFrame,text="",  font=('Mountain' ,55 ) )
+dateLabel = ctk.CTkLabel(clockFrame,text="",  font=('Mountain' ,45 ) )
 dateLabel.place(relx=0.5, rely=0.75, anchor='center'  )
 updatetimer()
 
-dailyFrame = ctk.CTkFrame(root , width=1320 , height=260 , bg_color='#132530' , fg_color="#132530")
-dailyFrame.place(x=115 , y=510 )
-currentW = ctk.CTkFrame(dailyFrame , width=300 , height=250 , bg_color='#132530', fg_color="#132530"  )
-currentW.place(x=10 ,y=5)
-lastT , img  = function.outputCurrentT()
-print(lastT , img)
+#currentW
+
+currentW = ctk.CTkFrame(root , width=250 , height=215 , bg_color='#132530', fg_color="#263138" ,   corner_radius=30   )
+currentW.place(x=100 ,y=426)
 
 
-my_image=ImagAdd('./static/3.png' , 100)
-currentWlabel1 = ctk.CTkLabel(currentW , image=my_image, text="" , width=200 , height=200 ,compound="left"  , bg_color='#987654'  ,font=('Mountain' ,50 )  )
-currentWlabel1.place(relx=0.3, rely=0.5, anchor='center')
 
-frameTT = ctk.CTkFrame(currentW , width=100 , height= 100)
-frameTT.place(relx=0.4, rely=0.26)
-currentWlabel2 = ctk.CTkLabel(frameTT , text=lastT ,compound="left"  , bg_color='#700570'  ,font=('Mountain' ,50 )  )
-currentWlabel2.place(relx=0.65, rely=0.35, anchor='center')
+my_image=ImagAdd(img , 100)
+currentWlabel1 = ctk.CTkLabel(currentW , image=my_image, text="" , width=120 , height=150   , bg_color='#263138'  ,font=('Mountain' ,50 )  )
+currentWlabel1.place(relx=0.07, rely=0.02)
 
-currentWlabel3 = ctk.CTkLabel(frameTT , text="o"  ,compound="left"  , bg_color='#707070'  ,font=('Mountain' ,20 )  )
-currentWlabel3.place(relx=0.75 , rely=0.3, anchor='center')
+frameTT = ctk.CTkFrame(currentW , width=104 , height= 52 , border_width=3 , border_color="#000000" ,   corner_radius=30 , fg_color='#06151e'  )
+frameTT.place(relx=0.55, rely=0.16)
+currentWlabel2 = ctk.CTkLabel(frameTT , text=lastT ,height=30  , bg_color='#06151e'
+                              ,font=('Mountain' ,45 ) )
+currentWlabel2.place(relx=0.26, rely=0.058)
 
+currentWlabel3 = ctk.CTkLabel(frameTT , text="o"  ,height=1  , bg_color='#06151e'  ,font=('Mountain' ,20 )  )
+currentWlabel3.place(relx=0.7 , rely=0.1)
+
+currentWlabel4 = ctk.CTkLabel(currentW , text="NOW" ,height=30  , bg_color='#263138'
+                              ,font=('Mountain' ,45 ) )
+currentWlabel4.place(relx=0.2, rely=0.63)
+
+#other TMPS
+container = ctk.CTkFrame(root , width=848 , height=215 , bg_color='#132530', fg_color="#263138" ,   corner_radius=30 )
+container.place(x=370 , y=426)
+
+#setting elems
+#elem1
+my_image=ImagAdd(dataDic['img'][0] , 60)
+elem1 = ctk.CTkLabel(container , image=my_image, text="",width=120 , height=200 , bg_color='#343234')
+elem1.place(x=15,y=6)
+frameTT = ctk.CTkFrame(elem1 , width=84 , height= 36 , border_width=3 , border_color="#000000" ,   corner_radius=30 , fg_color='#06151e'  )
+frameTT.place(relx=0.15 , rely=0.10)
+currentWlabel2 = ctk.CTkLabel(frameTT , text=dataDic['tmp'][0] ,height=30  , bg_color='#06151e'
+                              ,font=('Mountain' ,30 ) )
+currentWlabel2.place(relx=0.26, rely=0.058)
+
+currentWlabel3 = ctk.CTkLabel(frameTT , text="o"  ,height=1  , bg_color='#06151e'  ,font=('Mountain' ,15 )  )
+currentWlabel3.place(relx=0.8 , rely=0.1)
+currentWlabel4 = ctk.CTkLabel(elem1 , text="NOW" ,height=30  , bg_color='#263138'
+                              ,font=('Mountain' ,35 ) )
+currentWlabel4.place(relx=0.3 , rely=0.75)
+
+#elem2
+my_image=ImagAdd(dataDic['img'][1] , 60)
+elem2 = ctk.CTkLabel(container , image=my_image, text="",width=120 , height=200 , bg_color='#343234')
+elem2.place(x=155,y=6)
+frameTT = ctk.CTkFrame(elem2 , width=84 , height= 36 , border_width=3 , border_color="#000000" ,   corner_radius=30 , fg_color='#06151e'  )
+frameTT.place(relx=0.15 , rely=0.10)
+currentWlabel2 = ctk.CTkLabel(frameTT , text=dataDic['tmp'][1] ,height=30  , bg_color='#06151e'
+                              ,font=('Mountain' ,30 ) )
+currentWlabel2.place(relx=0.26, rely=0.058)
+
+currentWlabel3 = ctk.CTkLabel(frameTT , text="o"  ,height=1  , bg_color='#06151e'  ,font=('Mountain' ,15 )  )
+currentWlabel3.place(relx=0.8 , rely=0.1)
+currentWlabel4 = ctk.CTkLabel(elem2 , text="NOW" ,height=30  , bg_color='#263138'
+                              ,font=('Mountain' ,35 ) )
+currentWlabel4.place(relx=0.3 , rely=0.75)
+#elem3
+my_image=ImagAdd(dataDic['img'][2] , 60)
+elem3 = ctk.CTkLabel(container , image=my_image, text="",width=120 , height=200 , bg_color='#343234')
+elem3.place(x=295,y=6)
+frameTT = ctk.CTkFrame(elem3 , width=84 , height= 36 , border_width=3 , border_color="#000000" ,   corner_radius=30 , fg_color='#06151e'  )
+frameTT.place(relx=0.15 , rely=0.10)
+currentWlabel2 = ctk.CTkLabel(frameTT , text=dataDic['tmp'][2] ,height=30  , bg_color='#06151e'
+                              ,font=('Mountain' ,30 ) )
+currentWlabel2.place(relx=0.26, rely=0.058)
+
+currentWlabel3 = ctk.CTkLabel(frameTT , text="o"  ,height=1  , bg_color='#06151e'  ,font=('Mountain' ,15 )  )
+currentWlabel3.place(relx=0.8 , rely=0.1)
+currentWlabel4 = ctk.CTkLabel(elem3 , text="NOW" ,height=30  , bg_color='#263138'
+                              ,font=('Mountain' ,35 ) )
+currentWlabel4.place(relx=0.3 , rely=0.75)
+
+#elem4
+my_image=ImagAdd(dataDic['img'][3] , 60)
+elem4 = ctk.CTkLabel(container , image=my_image, text="",width=120 , height=200 , bg_color='#343234')
+elem4.place(x=435,y=6)
+frameTT = ctk.CTkFrame(elem4 , width=84 , height= 36 , border_width=3 , border_color="#000000" ,   corner_radius=30 , fg_color='#06151e'  )
+frameTT.place(relx=0.15 , rely=0.10)
+currentWlabel2 = ctk.CTkLabel(frameTT , text=dataDic['tmp'][3] ,height=30  , bg_color='#06151e'
+                              ,font=('Mountain' ,30 ) )
+currentWlabel2.place(relx=0.26, rely=0.058)
+
+currentWlabel3 = ctk.CTkLabel(frameTT , text="o"  ,height=1  , bg_color='#06151e'  ,font=('Mountain' ,15 )  )
+currentWlabel3.place(relx=0.8 , rely=0.1)
+currentWlabel4 = ctk.CTkLabel(elem4 , text="NOW" ,height=30  , bg_color='#263138'
+                              ,font=('Mountain' ,35 ) )
+currentWlabel4.place(relx=0.3 , rely=0.75)
+
+#elem5
+my_image=ImagAdd(dataDic['img'][4] , 60)
+elem5 = ctk.CTkLabel(container , image=my_image, text="",width=120 , height=200 , bg_color='#343234')
+elem5.place(x=575,y=6)
+frameTT = ctk.CTkFrame(elem5 , width=84 , height= 36 , border_width=3 , border_color="#000000" ,   corner_radius=30 , fg_color='#06151e'  )
+frameTT.place(relx=0.15 , rely=0.10)
+currentWlabel2 = ctk.CTkLabel(frameTT , text=dataDic['tmp'][4] ,height=30  , bg_color='#06151e'
+                              ,font=('Mountain' ,30 ) )
+currentWlabel2.place(relx=0.26, rely=0.058)
+
+currentWlabel3 = ctk.CTkLabel(frameTT , text="o"  ,height=1  , bg_color='#06151e'  ,font=('Mountain' ,15 )  )
+currentWlabel3.place(relx=0.8 , rely=0.1)
+currentWlabel4 = ctk.CTkLabel(elem5 , text="NOW" ,height=30  , bg_color='#263138'
+                              ,font=('Mountain' ,35 ) )
+currentWlabel4.place(relx=0.3 , rely=0.75)
+#elem6
+my_image=ImagAdd(dataDic['img'][5] , 60)
+elem6 = ctk.CTkLabel(container , image=my_image, text="",width=120 , height=200 , bg_color='#343234')
+elem6.place(x=715,y=6)
+frameTT = ctk.CTkFrame(elem6 , width=84 , height= 36 , border_width=3 , border_color="#000000" ,   corner_radius=30 , fg_color='#06151e'  )
+frameTT.place(relx=0.15 , rely=0.10)
+currentWlabel2 = ctk.CTkLabel(frameTT , text=dataDic['tmp'][5] ,height=30  , bg_color='#06151e'
+                              ,font=('Mountain' ,30 ) )
+currentWlabel2.place(relx=0.26, rely=0.058)
+
+currentWlabel3 = ctk.CTkLabel(frameTT , text="o"  ,height=1  , bg_color='#06151e'  ,font=('Mountain' ,15 )  )
+currentWlabel3.place(relx=0.8 , rely=0.1)
+currentWlabel4 = ctk.CTkLabel(elem6 , text="NOW" ,height=30  , bg_color='#263138'
+                              ,font=('Mountain' ,35 ) )
+currentWlabel4.place(relx=0.3 , rely=0.75)
 
 
 
