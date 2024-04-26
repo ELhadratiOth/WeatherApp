@@ -10,7 +10,7 @@ import numpy as np
 import pytz
 
 def get_current_time():
-    return datetime.now().strftime("%-I:%M %p")
+    return datetime.now().strftime("%I:%M %p")
 def get_current_weather(city_name):
     # Appel à l'API pour obtenir les coordonnées de la ville
     geocoder = Nominatim(user_agent="weather_app")
