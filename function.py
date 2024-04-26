@@ -152,8 +152,8 @@ def AirDetails(latitude, longitude):
     type , message , color = getAirQuality(aqi)
     return aqi , pm10 , pm2_5 , carbon_monoxide , nitrogen_dioxide , sulphur_dioxide , ozone , type , message , time , unity , color
 
-# lastT , img = outputCurrentT()
-# print(lastT , img)
+#lastT , img = outputCurrentT()
+#print(lastT , img)
 
 
 
