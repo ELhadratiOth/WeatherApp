@@ -2,7 +2,7 @@ import tkinter as tk
 import customtkinter
 import tkintermapview
 import fonction
-import app
+import app2
 import map
 import ipywidgets
 import seaborn
@@ -24,11 +24,12 @@ top.title("Weather informations")
 top.geometry("1300x700")
 top.resizable(0, 0)
 icon_path = "./static/loupe.png"
+image_path="./static/bcopie.psd"
 icon_image = tk.PhotoImage(file=icon_path)
-city_name ="rabat"
+city_name ="LOME"
 top.iconphoto(True, icon_image)
 # Appliquer l'image de fond
-app.backgroundApp(top)
+app2.backgroundApp(top,1300,700,image_path)
 frame1 = tk.Frame(top, bg="#132530", width=340, height=250)
 frame1.pack_propagate(0)  # Empêche le cadre de redimensionner son contenu
 frame1.place(x=100, y=60)
@@ -69,7 +70,7 @@ my_widget.set_zoom(15)
 my_widget.pack()
 
 def open_full_map():
-    ct.map.create_map_app(city_name)
+    map.create_map_app(city_name)
 
 
 # Bouton pour ouvrir la carte complète
