@@ -183,7 +183,7 @@ barFrame = ctk.CTkFrame(root,width=500 , height=60  )
 searchBar = ctk.CTkEntry(root ,width=350 , height=45 ,
                          placeholder_text="Location" , font=('Mountain' ,17 ) ,
                           fg_color='#344D59' , bg_color='#132530' , corner_radius=30 )
-searchBar.place(x=630, y=76)
+searchBar.place(x=630, y=76 )
 
 image_path = "./static/loupe.png"
 button_image = ImagAdd(image_path , 35)
