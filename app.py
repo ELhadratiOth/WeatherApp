@@ -9,31 +9,15 @@ from PIL import Image, ImageTk
 import tkintermapview
 
 
-def backgroundApp(root):
-    # Chemin de l'image à utiliser comme arrière-plan
-    image_path = "./static/bcopie.psd"
-
-    # Charger l'image
+def backgroundApp(root ,x , y ,image_path):
     image = Image.open(image_path)
-
-    # Définir la taille spécifiée pour la fenêtre
-    specified_width = 1300
-    specified_height = 700
-
-    # Redimensionner l'image pour correspondre à la taille spécifiée
+    specified_width = x
+    specified_height = y
     if image.width != specified_width or image.height != specified_height:
         image = image.resize((specified_width , specified_height), Image.Resampling.LANCZOS)
-
-    # Convertir l'image PIL en image Tkinter
     background_image = ImageTk.PhotoImage(image)
-
-    # Créer un Label pour afficher l'image
     background_label = tk.Label(root, image=background_image)
-
-    # Placer le label pour occuper toute la fenêtre (x=0, y=0) et l'étendre selon la largeur et hauteur relatives
     background_label.place(x=0, y=0, relwidth=1, relheight=1)
-
-    # Conserver une référence à l'image pour éviter que l'image soit supprimée par le garbage collector
     root.background_image = background_image
 
 
