@@ -313,7 +313,7 @@ currentWlabel45.place(relx=0.3 , rely=0.75)
 my_image=ImagAdd(dataDic['img'][4] , 60)
 elem5 = ctk.CTkLabel(container , image=my_image, text="",width=120 , height=170 , bg_color='#263138')
 elem5.place(x=575,y=36)
-frameTT = ctk.CTkFrame(elem5 , width=84 , height= 36 , border_width=3 , border_color="#000000" ,   corner_radius=30 , fg_color='#06151e'  )
+frameTT = ctk.CTkFrame(elem5 , width=84 , height= 36  ,  border_width=3 , border_color="#000000" ,   corner_radius=30 , fg_color='#06151e'  )
 frameTT.place(relx=0.15 , rely=0.08)
 currentWlabel26 = ctk.CTkLabel(frameTT , text=dataDic['tmp'][4] ,height=30  , bg_color='#06151e'
                               ,font=('Mountain' ,30 ) )
@@ -340,19 +340,20 @@ currentWlabel47 = ctk.CTkLabel(elem6 , text=dataDic['time'][5].split('T')[1] ,he
                               ,font=('Mountain' ,35 ) )
 currentWlabel47.place(relx=0.3 , rely=0.75)
 
-
-buttonChangePage  = ctk.CTkButton(root , text="24-hour forecast" , bg_color='#263138' , fg_color='#06151e' ,
-                                  border_width=2 , corner_radius=10 , border_color='#000000',
-                                  width=120 , height=35  , font=('Mountain' ,25 ))
-buttonChangePage.place(x=390  , y=430)
+forcastFrame =ctk.CTkFrame(root , width=180 , height=40  ,  border_width=3 , border_color="#000000" ,   corner_radius=30 , fg_color='#06151e' , bg_color='#263138'  )
+forcastFrame.place(x=390  , y=430)
+forcast  = ctk.CTkLabel(forcastFrame , text="24-hour forecast" , bg_color='#06151e' , fg_color='#06151e' ,
+                                   corner_radius=10 ,
+                                  width=105 , height=25  , font=('Mountain' ,24 ))
+forcast.place(x=13 , y=6)
 my_image    =  ImagAdd("./static/air-quality.png", 24)
-aqiButtun = ctk.CTkButton(currentW , image= my_image ,text="AQI "+ str(AirData[0]) , bg_color='#263138' , fg_color='#16191c'
+aqiButtun = ctk.CTkButton(currentW , image= my_image ,text="AQI "+ str(AirData[0]) , bg_color='#263138' , fg_color='#06151e'
                                 ,border_width=2 , corner_radius=10 , border_color='#000000',
                                   width=100 , height=34  , font=('Mountain' ,25 ) , command=open_toplevel ,  compound="left")
 aqiButtun.place(x=137 , y=170)
 
-moreD = ctk.CTkButton(root , width=200 , height=40 , text="GET MORE DETAILS" ,font=('Mountain' ,35 ) ,  bg_color='#132530'  , fg_color='#132530' , command=None)
-moreD.place(x=960 , y= 364)
+moreD = ctk.CTkButton(root , width=200 , height=40 , text="GET MORE DETAILS" ,font=('Mountain' ,35 ) ,  bg_color='#05141e'  , fg_color='#04303f' ,hover_color='#001a1a' ,border_width=3, border_color="#000000" , anchor='se' , corner_radius=23  , command=None)
+moreD.place(x=945 , y= 357)
 
 
 root.mainloop()
