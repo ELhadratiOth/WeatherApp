@@ -24,7 +24,9 @@ def getLocation():
             longitude = location.longitude
             lastT, img = function.outputCurrentT(latitude, longitude)
             dataDic = function.setImg(latitude, longitude)
+
             AirData = function.AirDetails(latitude, longitude)
+
             villeLabel.configure(text=searchBar.get())
             paysLabel.configure(text="not found")
             my_image = ImagAdd(img, 100)
