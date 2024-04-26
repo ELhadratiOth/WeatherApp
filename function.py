@@ -1,20 +1,9 @@
 import json
 from urllib.request import urlopen
 import requests
-import time
-import random
-
-# def actuall_data():
-#     url="http://ipinfo.io/json"
-#     response = urlopen(url)
-#     data = json.load(response)
-#     print(data)
-#     latitude=data['loc'].split(',')[0]
-#     longitude=data['loc'].split(',')[1]
-#     return latitude , longitude
 
 def getCurrentLocation(latitude, longitude):
-    weatherApiUrl = f"https://api.open-meteo.com/v1/dwd-icon?latitude={latitude}&longitude={longitude}&hourly=temperature_2m,weather_code&forecast_hours=24"
+    weatherApiUrl = f"https://api.open-meteo.com/v1/dwd-icon?latitude={latitude}&longitude={longitude}&hourly=temperature_2m,weather_code,is_day&timezone=auto&forecast_hours=24"
     getting_weather= requests.get(weatherApiUrl)
     currentWeather = getting_weather.json()
     print(currentWeather)
@@ -24,16 +13,16 @@ def getCurrentLocation(latitude, longitude):
 
 def oganiseData(latitude, longitude):
     currentWeather = getCurrentLocation(latitude, longitude)
-    indices_utilises = random.sample(range(24), 6)
-    indices_utilises.sort()
-    time = [ currentWeather['hourly']['time'][i] for i in indices_utilises ]
-    tmp = [currentWeather['hourly']['temperature_2m'][i] for i in indices_utilises ]
-    tmp_code = [currentWeather['hourly']['weather_code'][i] for i in indices_utilises ]
+    time =  currentWeather['hourly']['time'][::4]
+    tmp = currentWeather['hourly']['temperature_2m'][::4]
+    tmp_code = currentWeather['hourly']['weather_code'][::4]
+    is_day= currentWeather['hourly']['is_day'][::4]
     print(tmp_code)
     dataDic = {
         'time': time ,
         'tmp': tmp ,
-        'tmp_code': tmp_code
+        'tmp_code': tmp_code ,
+        'is_day' : is_day
     }
     print('oganiseData')
 
@@ -42,23 +31,45 @@ def oganiseData(latitude, longitude):
 def setImg( latitude, longitude):
     dataDic = oganiseData(latitude, longitude)
     img =[]
-    for data in dataDic['tmp_code'] :
+    for data , isday in zip(dataDic['tmp_code'] ,dataDic['is_day'])  :
         if int(data) == 0 :
-            img.append("./static/1.png")
+            if int(isday) == 0 :
+                img.append("./static/1n.png")
+            else :
+                img.append("./static/1.png")
         elif int(data) in [1,2,3]:
-            img.append("./static/2.png")
+            if int(isday) == 0 :
+                img.append("./static/2n.png")
+            else :
+                img.append("./static/2.png")
         elif int(data) in [56,67 ,51,53,55 ,45,48] :
-            img.append("./static/3.png")
+            if int(isday) == 0 :
+                img.append("./static/3n.png")
+            else :
+                img.append("./static/3.png")
         elif int(data) in [61,63,65] :
-            img.append("./static/4.png")
+            if int(isday) == 0 :
+                img.append("./static/4n.png")
+            else :
+                img.append("./static/4.png")
         elif int(data) in [66,67]:
-            img.append("./static/6710.png")
+            if int(isday) == 0 :
+                img.append("./static/6710.png")
         elif int(data) in [71,73] :
-            img.append("./static/5.png")
+            if int(isday) == 0 :
+                img.append("./static/5n.png")
+            else :
+                img.append("./static/5.png")
         elif int(data) in [75,77] :
-            img.append("./static/911.png")
+            if int(isday) == 0 :
+                img.append("./static/911n.png")
+            else :
+                img.append("./static/911.png")
         elif int(data) in [80,81,82,85,86] :
-            img.append("./static/8.png")
+            if int(isday) == 0 :
+                img.append("./static/8n.png")
+            else :
+                img.append("./static/8.png")
     dataDic['img']= img
     print(img)
     print('setImg')
@@ -76,7 +87,7 @@ def actuall_dataCompli():
     city = data['city']
     return latitude , longitude , region , city
 def getCurrentWeather(latitude, longitude):
-    weatherApiUrl = f"https://api.open-meteo.com/v1/dwd-icon?latitude={latitude}&longitude={longitude}&current=temperature_2m,weather_code&forecast_days=1"
+    weatherApiUrl = f"https://api.open-meteo.com/v1/dwd-icon?latitude={latitude}&longitude={longitude}&current=temperature_2m,is_day,weather_code&timezone=auto"
 
     getting_weather= requests.get(weatherApiUrl)
     if getting_weather.status_code == 200:
@@ -84,9 +95,9 @@ def getCurrentWeather(latitude, longitude):
         print(currentWeather)
         lastT = currentWeather['current']['temperature_2m']
         code_lastT = currentWeather['current']['weather_code']
+        is_day = currentWeather['current']['is_day']
 
-
-        return lastT , code_lastT
+        return lastT , code_lastT , is_day
     else :
             print("error de connexion")
             return
@@ -94,27 +105,46 @@ def getCurrentWeather(latitude, longitude):
 
 def outputCurrentT(latitude, longitude):
     img = ""
-    lastT , code_lastT  = getCurrentWeather(latitude, longitude)
+    lastT , code_lastT , isday  = getCurrentWeather(latitude, longitude)
     print(code_lastT)
     print(lastT)
     if int(code_lastT) == 0:
-        img = "./static/1.png"
+        if isday == 0 :
+            img = "./static/1n.png"
+        else :
+            img = "./static/1.png"
     elif int(code_lastT) in [1, 2, 3]:
-        img = "./static/2.png"
+        if isday == 0 :
+            img = "./static/2n.png"
+        else :
+            img = "./static/2.png"
     elif int(code_lastT) in [56, 67, 51, 53, 55, 45, 48]:
-        img = "./static/3.png"
+        if isday == 0 :
+            img = "./static/3n.png"
+        else :
+            img = "./static/3.png"
     elif int(code_lastT) in [61, 63, 65]:
-         img = "./static/4.png"
+        if isday == 0:
+            img = "./static/4n.png"
+        else:
+            img = "./static/4.png"
     elif int(code_lastT) in [66, 67]:
          img = "./static/6710.png"
     elif int(code_lastT) in [71, 73]:
-         img = "./static/5.png"
+        if isday == 0:
+            img = "./static/5n.png"
+        else:
+            img = "./static/5.png"
     elif int(code_lastT) in [75, 77]:
-         img = "./static/911.png"
+        if isday == 0:
+            img = "./static/911n.png"
+        else:
+            img = "./static/911.png"
     elif int(code_lastT) in [80, 81, 82, 85, 86]:
-         img = "./static/8.png"
-    print("imaff" , img)
-    print('outputCurrentT')
+        if isday == 0:
+            img = "./static/8n.png"
+        else:
+            img = "./static/8.png"
 
     return str(lastT).split('.')[0] , img
 
@@ -151,9 +181,6 @@ def AirDetails(latitude, longitude):
 
     type , message , color = getAirQuality(aqi)
     return aqi , pm10 , pm2_5 , carbon_monoxide , nitrogen_dioxide , sulphur_dioxide , ozone , type , message , time , unity , color
-
-#lastT , img = outputCurrentT()
-#print(lastT , img)
 
 
 

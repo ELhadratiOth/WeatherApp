@@ -1,6 +1,6 @@
 import customtkinter
 from tkintermapview import TkinterMapView
-import cartography as ct
+# import cartography as ct
 
 customtkinter.set_default_color_theme("blue")
 
@@ -108,4 +108,4 @@ def create_map_app(location):
     app = App()
     app.start()
 
-
+create_map_app('rabat')

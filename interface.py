@@ -18,6 +18,7 @@ def getLocation():
         print(searchBar.get())
         geocoder = Nominatim(user_agent="weather_app")
         location = geocoder.geocode(searchBar.get())
+        print(list(location))
         global  AirData , city 
         if location:
             latitude = location.latitude
@@ -28,7 +29,7 @@ def getLocation():
             AirData = function.AirDetails(latitude, longitude)
 
             villeLabel.configure(text=searchBar.get())
-            paysLabel.configure(text="not found")
+            paysLabel.configure(text=location.address.split()[-2].split()[0][:-1])
             my_image = ImagAdd(img, 100)
             currentWlabel11.configure(image=my_image)
             currentWlabel21.configure(text=lastT)
@@ -181,7 +182,7 @@ barFrame = ctk.CTkFrame(root,width=500 , height=60  )
 
 #search bar
 searchBar = ctk.CTkEntry(root ,width=350 , height=45 ,
-                         placeholder_text="Location" , font=('Mountain' ,17 ) ,
+                         placeholder_text="Location" , font=('Mountain' ,25 ) ,
                           fg_color='#344D59' , bg_color='#132530' , corner_radius=30 )
 searchBar.place(x=630, y=76 )
 
@@ -189,15 +190,17 @@ image_path = "./static/loupe.png"
 button_image = ImagAdd(image_path , 35)
 buttonSearchBar = ctk.CTkButton(root, text="Confirmer", image=button_image ,
                                 command=getLocation , width=30 , height=45 , compound="right"
-                                ,font=('Mountain' ,25 )  , anchor="se"
-                                ,fg_color='#004d4d' , hover_color="#001a1a" ,bg_color='#132530', corner_radius=30
+                                ,font=('Mountain' , 25)  , anchor="se"
+                                ,fg_color='#04303f' , hover_color="#001a1a" ,bg_color='#132530', corner_radius=30
                                )
 buttonSearchBar.place(y=76, x=994)
 
 #data city
+geocoder = Nominatim(user_agent="weather_app")
+location = geocoder.geocode(city)
 
-villeFrame = ctk.CTkFrame(root ,  fg_color='#132530' ,  height=80 , width=130 ,bg_color='#132530' )
-villeFrame.place(x=1045 ,y =197 )
+villeFrame = ctk.CTkFrame(root ,  fg_color='#132530' ,  height=80 , width=140 ,bg_color='#132530' )
+villeFrame.place(x=1035 ,y =197 )
 villeLabel  = ctk.CTkLabel(villeFrame , font=('Mountain' ,40 ) , text=city , fg_color='transparent',justify='right')
 villeLabel.place(relx=0.93, rely=0.35, anchor='e')
 paysLabel  = ctk.CTkLabel(villeFrame , font=('Mountain' ,20 ) , text=region , fg_color='transparent' , justify='right')
@@ -348,6 +351,8 @@ aqiButtun = ctk.CTkButton(currentW , image= my_image ,text="AQI "+ str(AirData[0
                                   width=100 , height=34  , font=('Mountain' ,25 ) , command=open_toplevel ,  compound="left")
 aqiButtun.place(x=137 , y=170)
 
+moreD = ctk.CTkButton(root , width=200 , height=40 , text="GET MORE DETAILS" ,font=('Mountain' ,35 ) ,  bg_color='#132530'  , fg_color='#132530' , command=None)
+moreD.place(x=960 , y= 364)
 
 
 root.mainloop()
