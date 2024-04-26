@@ -11,7 +11,7 @@ import geopy
 import folium
 import customtkinter as ctk
 from PIL import Image, ImageTk
-import cartography as ct
+# import cartography as ct
 
 from tkintermapview import TkinterMapView
 
