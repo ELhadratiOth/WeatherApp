@@ -15,6 +15,15 @@ def get_current_weather(city_name):
     # Appel à l'API pour obtenir les coordonnées de la ville
     geocoder = Nominatim(user_agent="weather_app")
     location = geocoder.geocode(city_name)
+    l=location.raw['display_name']
+    print(l)
+
+    address_details = location.raw.get('address', {})
+
+    # Récupérer la région et le pays à partir des détails de l'adresse
+    region = address_details.get('state', '')
+    country = address_details.get('country', '')
+    print(region,country)
     if location:
         latitude = location.latitude
         longitude = location.longitude
@@ -223,3 +232,5 @@ ax1.set_xticklabels(hours[::3], rotation=45, color='black')
 fig.tight_layout()
 plt.title('Hourly Temperature Forecast', color='green', fontsize=14)
 plt.show()"""
+
+get_current_weather('lome')

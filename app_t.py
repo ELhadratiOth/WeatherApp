@@ -27,6 +27,8 @@ icon_path = "./static/loupe.png"
 image_path="./static/bcopie.psd"
 icon_image = tk.PhotoImage(file=icon_path)
 city_name ="LOME"
+toplevel_window= tk.Toplevel()
+toplevel_window.destroy()
 top.iconphoto(True, icon_image)
 # Appliquer l'image de fond
 app2.backgroundApp(top,1300,700,image_path)
@@ -70,8 +72,12 @@ my_widget.set_zoom(15)
 my_widget.pack()
 
 def open_full_map():
-    map.create_map_app(city_name)
-
+    # Function to open the Toplevel window
+    global toplevel_window
+    if toplevel_window is None or not toplevel_window.winfo_exists():
+        toplevel_window = map.create_map_app(city_name)  # Create the window if it's None or destroyed
+    else:
+        toplevel_window.focus()
 
 # Bouton pour ouvrir la carte complète
 open_map_button = ctk.CTkButton(master=my_label, text="Open Full Map", command=open_full_map)
