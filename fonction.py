@@ -195,3 +195,31 @@ def update_wind_speed_unit(value):
 
 def update_time_format(value):
     print("Time Format:", value)
+
+# Graphique de variation de la température par heure
+"""hourly_data = get_weather_data("fes")
+
+hours = np.array(hourly_data["hour"])
+temperatures = np.array(hourly_data['temperature'])
+
+fig, ax1 = plt.subplots(figsize=(10, 6))
+
+color = 'tab:blue'
+ax1.set_facecolor('white')  # Noir pour le background
+ax1.set_xlabel('Hours', color='black', fontsize=12)
+ax1.set_ylabel('Temperature (°C)', color='black', fontsize=12)
+ax1.plot(hours, temperatures, color=color)
+ax1.tick_params(axis='y', labelcolor=color)
+
+# Affichage des valeurs de température sur la courbe
+for i, temp in enumerate(temperatures):
+    ax1.text(hours[i], temp, f"{temp}°", ha='center', va='bottom', fontsize=8, color='white')
+
+ax1.grid(True, linestyle='--', linewidth=0.5, color='black', alpha=0.5)
+
+ax1.set_xticks(np.arange(0, len(hours), 3))
+ax1.set_xticklabels(hours[::3], rotation=45, color='black')
+
+fig.tight_layout()
+plt.title('Hourly Temperature Forecast', color='green', fontsize=14)
+plt.show()"""

@@ -1,8 +1,8 @@
 import tkinter as tk
 import customtkinter
 import tkintermapview
-import test
 import fonction
+import app
 import map
 import ipywidgets
 import seaborn
@@ -25,10 +25,10 @@ top.geometry("1300x700")
 top.resizable(0, 0)
 icon_path = "./static/loupe.png"
 icon_image = tk.PhotoImage(file=icon_path)
-city_name = "fès"
-# top.iconphoto(True, icon_image)
+city_name ="rabat"
+top.iconphoto(True, icon_image)
 # Appliquer l'image de fond
-test.backgroundApp(top)
+app.backgroundApp(top)
 frame1 = tk.Frame(top, bg="#132530", width=340, height=250)
 frame1.pack_propagate(0)  # Empêche le cadre de redimensionner son contenu
 frame1.place(x=100, y=60)
