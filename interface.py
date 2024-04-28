@@ -29,7 +29,8 @@ def getLocation():
             AirData = function.AirDetails(latitude, longitude)
 
             villeLabel.configure(text=searchBar.get() )
-            paysLabel.configure(text=location.address.split()[-2].split()[0][:-1])
+            print(location.address)
+            paysLabel.configure(text=location.address.split()[-1])
             my_image = ImagAdd(img, 100)
             currentWlabel11.configure(image=my_image)
             currentWlabel21.configure(text=lastT)
