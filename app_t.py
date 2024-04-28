@@ -24,13 +24,12 @@ CONST_FAHRENHEIT=32
 from tkintermapview import TkinterMapView
 
 customtkinter.set_default_color_theme("blue")
-toplevel_window=tk.Toplevel()
-toplevel_window.destroy()
 city_names=""
 # Initialisation de la fenêtre
 def open_full_map():
     # Function to open the Toplevel window
-    global toplevel_window
+    toplevel_window = tk.Toplevel()
+    toplevel_window.destroy()
     if toplevel_window is None or not toplevel_window.winfo_exists():
         toplevel_window = map.create_map_app(city_names)  # Create the window if it's None or destroyed
     else:
