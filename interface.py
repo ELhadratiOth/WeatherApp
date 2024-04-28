@@ -1,6 +1,6 @@
 import tkinter as tk
 import customtkinter as ctk
-from PIL import Image, ImageTk
+from PIL import Image
 import app
 import time
 import function
@@ -100,9 +100,9 @@ def create_toplevel_window():
     frameTop = ctk.CTkFrame(toplevel_window, width=340, height=240, bg_color='#091c25', fg_color='#091c25',
                             corner_radius=30)
     frameTop.place(x=30, y=27)
-    airQ = ctk.CTkLabel(frameTop, width=100, height=19, text='Air Quality Index', font=('Davish Medium', 35))
+    airQ = ctk.CTkLabel(frameTop, width=100, height=30, text='Air Quality Index', font=('Davish Medium', 35))
     airQ.place(x=10, y=0)
-    airPdetail = ctk.CTkLabel(frameTop, width=100, height=15, text= city+ 'Published at '+ AirData[9],
+    airPdetail = ctk.CTkLabel(frameTop, width=100, height=15, text= city+ ' Published at '+ AirData[9],
                               font=('Davish Medium', 20))
     airPdetail.place(x=10, y=46)
     aqiVal = ctk.CTkLabel(frameTop, width=100, height=15, text=AirData[0], font=('Davish Medium', 65), text_color=AirData[11])
@@ -115,54 +115,56 @@ def create_toplevel_window():
     # block1
     framBolock1 = ctk.CTkFrame(frameTop, width=50, height=50 , bg_color='#091c25' ,  fg_color='#091c25')
     framBolock1.place(x=1, y=180)
-    elem11 = ctk.CTkLabel(framBolock1, text=AirData[2], font=('Davish Medium', 20), text_color=AirData[11])
-    elem11.place(x=10, y=0)
+
     elem21 = ctk.CTkLabel(framBolock1, text="PM2.5", font=('Davish Medium', 15))
     elem21.place(x=10, y=21)
+    elem11 = ctk.CTkLabel(framBolock1, text=AirData[2], font=('Davish Medium', 20), text_color=AirData[11])
+    elem11.place(x=9, y=0)
     # block2
     framBolock2 = ctk.CTkFrame(frameTop, width=50, height=50 , bg_color='#091c25' ,  fg_color='#091c25')
     framBolock2.place(x=59, y=180)
-    elem12 = ctk.CTkLabel(framBolock2, text=AirData[1], font=('Davish Medium', 20), text_color=AirData[11])
-    elem12.place(x=10, y=0)
     elem22 = ctk.CTkLabel(framBolock2, text="PM10", font=('Davish Medium', 15))
     elem22.place(x=12, y=21)
+    elem12 = ctk.CTkLabel(framBolock2, text=AirData[1], font=('Davish Medium', 20), text_color=AirData[11])
+    elem12.place(x=11, y=0)
     # block3
     framBolock3 = ctk.CTkFrame(frameTop, width=50, height=50 , bg_color='#091c25' ,  fg_color='#091c25')
     framBolock3.place(x=117, y=180)
-    elem13 = ctk.CTkLabel(framBolock3, text=AirData[5], font=('Davish Medium', 20), text_color=AirData[11])
-    elem13.place(x=15, y=0)
     elem23 = ctk.CTkLabel(framBolock3, text="SO₂", font=('Davish Medium', 15))
     elem23.place(x=17, y=21)
+    elem13 = ctk.CTkLabel(framBolock3, text=AirData[5], font=('Davish Medium', 20), text_color=AirData[11])
+    elem13.place(x=15, y=0)
     # block4
     framBolock4 = ctk.CTkFrame(frameTop, width=50, height=50 , bg_color='#091c25' ,  fg_color='#091c25')
     framBolock4.place(x=176, y=180)
-    elem14 = ctk.CTkLabel(framBolock4, text=AirData[4], font=('Davish Medium', 20), text_color=AirData[11])
-    elem14.place(x=10, y=0)
     elem24 = ctk.CTkLabel(framBolock4, text="NO₂", font=('Davish Medium', 15))
     elem24.place(x=17, y=21)
+    elem14 = ctk.CTkLabel(framBolock4, text=AirData[4], font=('Davish Medium', 20), text_color=AirData[11])
+    elem14.place(x=11, y=0)
     # block5
     framBolock5 = ctk.CTkFrame(frameTop, width=50, height=50,bg_color='#091c25' ,  fg_color='#091c25')
     framBolock5.place(x=234, y=180)
-    elem15 = ctk.CTkLabel(framBolock5, text=AirData[6], font=('Davish Medium', 20), text_color=AirData[11])
-    elem15.place(x=10, y=0)
     elem25 = ctk.CTkLabel(framBolock5, text="O₃", font=('Davish Medium', 15))
     elem25.place(x=20, y=21)
+    elem15 = ctk.CTkLabel(framBolock5, text=AirData[6], font=('Davish Medium', 20), text_color=AirData[11])
+    elem15.place(x=10, y=0)
     # block6
     framBolock6 = ctk.CTkFrame(frameTop, width=50, height=50 , bg_color='#091c25' , fg_color='#091c25')
     framBolock6.place(x=290, y=180)
-    elem16 = ctk.CTkLabel(framBolock6, text=AirData[3], font=('Davish Medium', 20), text_color=AirData[11])
-    elem16.place(x=10, y=0)
     elem26 = ctk.CTkLabel(framBolock6, text="CO", font=('Davish Medium', 15))
     elem26.place(x=19, y=21)
+    elem16 = ctk.CTkLabel(framBolock6, text=AirData[3], font=('Davish Medium', 20), text_color=AirData[11])
+    elem16.place(x=10, y=0)
 
     return toplevel_window
 
 def open_toplevel():
-    # Function to open the Toplevel window
     global toplevel_window
+
     if toplevel_window is None or not toplevel_window.winfo_exists():
-        toplevel_window = create_toplevel_window()  # Create the window if it's None or destroyed
+        toplevel_window = create_toplevel_window()
     else:
+        toplevel_window = create_toplevel_window()
         toplevel_window.focus()
 
 def create_toplevel_window_details():
@@ -173,6 +175,7 @@ def open_toplevel_details():
     if toplevel_window is None or not toplevel_window.winfo_exists():
         toplevel_window = create_toplevel_window_details()
     else:
+        toplevel_window = create_toplevel_window_details()
         toplevel_window.focus()
 
 
@@ -183,6 +186,8 @@ dataDic=function.setImg(latitude, longitude)
 AirData=function.AirDetails(latitude, longitude)
 
 toplevel_window = None
+
+
 root = tk.Tk()
 root.title("Weather App")
 root.geometry("1300x700")
