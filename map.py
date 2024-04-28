@@ -33,7 +33,7 @@ def create_map_app(location):
     # Left frame
 
     frame_left = customtkinter.CTkFrame(master=top_level, width=60,height=100, corner_radius=1, fg_color="#132530")
-    frame_left.place(x=35,y=150)
+    frame_left.place(x=28,y=150)
 
     map_label = customtkinter.CTkLabel(frame_left, width=60,text="Tile Server:", anchor="w")
     map_label.grid(row=3, column=0, padx=(20, 20), pady=(20, 0))

@@ -58,7 +58,7 @@ def getMoreDetails(city_name):
 
     frame2 = tk.Frame(top, bg="#132530", width=800, height=290)
     frame2.pack_propagate(0)  # Empêche le cadre de redimensionner son contenu
-    frame2.place(x=100, y=320)
+    frame2.place(x=100, y=350)
 
     frame3 = tk.Frame(top, bg="#132530", width=250, height=290)
     frame3.pack_propagate(0)  # Empêche le cadre de redimensionner son contenu
