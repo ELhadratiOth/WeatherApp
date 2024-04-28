@@ -96,7 +96,7 @@ def getMoreDetails(city_name):
     my_widget.pack()
 
     # Bouton pour ouvrir la carte complète
-    open_map_button = ctk.CTkButton(master=my_label, text="Open Full Map", command=open_full_map)
+    open_map_button = ctk.CTkButton(master=my_label,fg_color="#04303f", text="Open Full Map", command=open_full_map)
     open_map_button.place(x=250, y=200)
 
     # Label pour le titre "Current Weather"
@@ -255,21 +255,21 @@ def getMoreDetails(city_name):
                                       font=("Helvetica", 10, "bold"))
     temperature_unit_label.pack(anchor="w", padx=5, pady=(35, 0))
 
-    temperature_unit_dropdown = customtkinter.CTkOptionMenu(frame5, values=temp_options,
+    temperature_unit_dropdown = customtkinter.CTkOptionMenu(frame5, fg_color="#04303f",values=temp_options,
                                                             command=update_temperature_unit)
     temperature_unit_dropdown.pack(anchor="w", padx=5, pady=5)
     temperature_unit_dropdown.set("Celsius °C")
 
     pressure_unit_label = tk.Label(frame5, text="Pressure Unit:", fg="white", bg="#132530", font=("Helvetica", 10, "bold"))
     pressure_unit_label.pack(anchor="w", padx=5, pady=(15, 5))
-    pressure_unit_dropdown = customtkinter.CTkOptionMenu(frame5, values=pres_options, command=update_pressure_unit)
+    pressure_unit_dropdown = customtkinter.CTkOptionMenu(frame5,fg_color="#04303f" ,values=pres_options, command=update_pressure_unit)
     pressure_unit_dropdown.pack(anchor="w", padx=5)
     pressure_unit_dropdown.set("hPa")
 
     wind_speed_unit_label = tk.Label(frame5, text="Wind Speed Unit:", fg="white", bg="#132530",
                                      font=("Helvetica", 10, "bold"))
     wind_speed_unit_label.pack(anchor="w", padx=5, pady=(15, 5))
-    wind_speed_unit_dropdown = customtkinter.CTkOptionMenu(frame5, values=win_options,
+    wind_speed_unit_dropdown = customtkinter.CTkOptionMenu(frame5,fg_color="#04303f", values=win_options,
                                                            command=update_wind_speed_unit)
     wind_speed_unit_dropdown.pack(anchor="w", padx=5)
     wind_speed_unit_dropdown.set("Km/h")
