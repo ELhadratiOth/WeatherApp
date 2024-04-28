@@ -153,7 +153,7 @@ def getMoreDetails(city_name):
             value_label.pack(side=tk.LEFT, padx=20, pady=(0, 5))
             liste_value_label.append(value_label)
 
-    forecast_title_frame = ctk.CTkFrame(frame3, fg_color="#1a1a1a", bg_color="transparent",width=800, height=40,corner_radius=33)
+    forecast_title_frame = ctk.CTkFrame(frame3, fg_color="#1a1a1a", bg_color="transparent",width=400, height=40,corner_radius=33)
     forecast_title_frame.pack_propagate(0)
     forecast_title_frame.place(x=0, y=0)
     forecast_label = tk.Label(forecast_title_frame, text="Forecast", fg="white", bg="#1a1a1a",
