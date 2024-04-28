@@ -62,11 +62,11 @@ def getMoreDetails(city_name):
 
     frame3 = tk.Frame(top, bg="#132530", width=250, height=290)
     frame3.pack_propagate(0)  # Empêche le cadre de redimensionner son contenu
-    frame3.place(x=950, y=320)
+    frame3.place(x=950, y=347)
 
     frame4 = tk.Frame(top, bg="#132530", width=600, height=250)
     frame4.pack_propagate(0)  # Empêche le cadre de redimensionner son contenu
-    frame4.place(x=470, y=60)
+    frame4.place(x=466, y=60)
 
     frame5 = tk.Frame(top, bg="#132530", width=120, height=250)
     frame5.pack_propagate(0)  # Empêche le cadre de redimensionner son contenu
@@ -153,13 +153,13 @@ def getMoreDetails(city_name):
             value_label.pack(side=tk.LEFT, padx=20, pady=(0, 5))
             liste_value_label.append(value_label)
 
-    forecast_title_frame = tk.Frame(frame3, bg="#1a1a1a", width=800, height=40)
+    forecast_title_frame = ctk.CTkFrame(frame3, fg_color="#1a1a1a", bg_color="transparent",width=800, height=40,corner_radius=33)
     forecast_title_frame.pack_propagate(0)
     forecast_title_frame.place(x=0, y=0)
     forecast_label = tk.Label(forecast_title_frame, text="Forecast", fg="white", bg="#1a1a1a",
                               font=("Helvetica", 14, "bold"))
     forecast_label.pack(pady=5, padx=5, side="left")
-    label_7 = tk.Label(forecast_title_frame, text="6 days", font=("Helvetica", 10), fg="white", bg="#1a1a1a")
+    label_7 = tk.Label(forecast_title_frame, text="6 days", font=("Helvetica", 10), fg="white", bg="red")
     label_7.pack(side=tk.LEFT, padx=90, pady=(0, 5))
 
     daily_data = fonction.get_daily_weather_forecast(city_name)
