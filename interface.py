@@ -166,7 +166,7 @@ def open_toplevel():
         toplevel_window.focus()
 
 def create_toplevel_window_details():
-    app_t.commandGetMoreDetails(city)
+    app_t.getMoreDetails(city)
 
 def open_toplevel_details():
     global toplevel_window
