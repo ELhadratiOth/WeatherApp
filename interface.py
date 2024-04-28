@@ -6,7 +6,7 @@ import time
 import function
 from tkinter import messagebox
 from geopy import Nominatim
-
+import app_t
 airPdetail, aqiVal, typelabel, massagelabel, elem11, elem12, elem13, elem14, elem15, elem16  , city  = ("",) * 11
 
 
