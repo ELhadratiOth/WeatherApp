@@ -1,111 +1,73 @@
+import warnings
+from tkinter import Toplevel
+import app2
 import customtkinter
 from tkintermapview import TkinterMapView
 # import cartography as ct
-
+warnings.filterwarnings("ignore")
 customtkinter.set_default_color_theme("blue")
 
 
+def change_appearance_mode(new_appearance_mode: str):
+    customtkinter.set_appearance_mode(new_appearance_mode)
+
+
+def change_map(new_map: str):
+    if new_map == "OpenStreetMap":
+        map_widget.set_tile_server("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png")
+    elif new_map == "Google normal":
+        map_widget.set_tile_server("https://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", max_zoom=22)
+    elif new_map == "Google satellite":
+        map_widget.set_tile_server("https://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}&s=Ga", max_zoom=22)
+
+image_pa="./static/bgmap.psd"
 def create_map_app(location):
-    class App(customtkinter.CTk):
+    top_level = Toplevel()
+    top_level.title("Full map")
+    top_level.geometry("800x500")
+    top_level.minsize(800, 500)
+    app2.backgroundApp(top_level, 800, 500, image_pa)
+    top_level.grid_columnconfigure(0, weight=0)
+    top_level.grid_columnconfigure(1, weight=1)
+    top_level.grid_rowconfigure(0, weight=1)
 
-        APP_NAME = "Full map"
-        WIDTH = 800
-        HEIGHT = 500
+    marker_list = []
 
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
+    # Left frame
 
-            self.title(App.APP_NAME)
-            self.geometry(str(App.WIDTH) + "x" + str(App.HEIGHT))
-            self.minsize(App.WIDTH, App.HEIGHT)
+    frame_left = customtkinter.CTkFrame(master=top_level, width=60,height=100, corner_radius=0, fg_color="#132530")
+    frame_left.place(x=10,y=150)
 
-            self.protocol("WM_DELETE_WINDOW", self.on_closing)
-            self.bind("<Command-q>", self.on_closing)
-            self.bind("<Command-w>", self.on_closing)
-            self.createcommand('tk::mac::Quit', self.on_closing)
+    map_label = customtkinter.CTkLabel(frame_left, width=60,text="Tile Server:", anchor="w")
+    map_label.grid(row=3, column=0, padx=(20, 20), pady=(20, 0))
+    map_option_menu = customtkinter.CTkOptionMenu(frame_left, values=["OpenStreetMap", "Google normal",
+                                                                      "Google satellite"],
+                                                  command=change_map)
+    map_option_menu.grid(row=4, column=0, padx=(20, 20), pady=(10, 0))
 
-            self.marker_list = []
+    appearance_mode_label = customtkinter.CTkLabel(frame_left, width=60,text="Appearance Mode:", anchor="w")
+    appearance_mode_label.grid(row=5, column=0, padx=(20, 20), pady=(20, 0))
+    appearance_mode_optionmenu = customtkinter.CTkOptionMenu(frame_left,
+                                                             values=["Light", "Dark", "System"],
+                                                             command=change_appearance_mode)
+    appearance_mode_optionmenu.grid(row=6, column=0, padx=(20, 20), pady=(10, 20))
 
-            # ============ create two CTkFrames ============
+    # Right frame
+    frame_right = customtkinter.CTkFrame(top_level, width=570,height=430,corner_radius=0)
+    frame_right.place(x=215,y=30)
+    global map_widget
+    map_widget = TkinterMapView(frame_right,width=570,height=435)
+    map_widget.place(x=0,y=0)
+    marker_1 = map_widget.set_address(location, marker=True)
 
-            self.grid_columnconfigure(0, weight=0)
-            self.grid_columnconfigure(1, weight=1)
-            self.grid_rowconfigure(0, weight=1)
+    print(marker_1.position, marker_1.text)  # get position and text
 
-            self.frame_left = customtkinter.CTkFrame(master=self, width=150, corner_radius=0, fg_color=None)
-            self.frame_left.grid(row=0, column=0, padx=0, pady=0, sticky="nsew")
+    marker_1.set_text(location)  # set new text
 
-            self.frame_right = customtkinter.CTkFrame(master=self, corner_radius=0)
-            self.frame_right.grid(row=0, column=1, rowspan=1, pady=0, padx=0, sticky="nsew")
+    # Set default values
+    map_widget.set_address(location)
+    map_option_menu.set("OpenStreetMap")
+    appearance_mode_optionmenu.set("Dark")
 
-            # ============ frame_left ============
+    return top_level
 
-            self.frame_left.grid_rowconfigure(2, weight=1)
-
-            self.button_1 = customtkinter.CTkButton(master=self.frame_left,
-                                                    text="Set Marker",
-                                                    command=self.set_marker_event)
-            self.button_1.grid(pady=(20, 0), padx=(20, 20), row=0, column=0)
-
-            self.button_2 = customtkinter.CTkButton(master=self.frame_left,
-                                                    text="Clear Markers",
-                                                    command=self.clear_marker_event)
-            self.button_2.grid(pady=(20, 0), padx=(20, 20), row=1, column=0)
-
-            self.map_label = customtkinter.CTkLabel(self.frame_left, text="Tile Server:", anchor="w")
-            self.map_label.grid(row=3, column=0, padx=(20, 20), pady=(20, 0))
-            self.map_option_menu = customtkinter.CTkOptionMenu(self.frame_left, values=["OpenStreetMap", "Google normal", "Google satellite"],
-                                                                           command=self.change_map)
-            self.map_option_menu.grid(row=4, column=0, padx=(20, 20), pady=(10, 0))
-
-            self.appearance_mode_label = customtkinter.CTkLabel(self.frame_left, text="Appearance Mode:", anchor="w")
-            self.appearance_mode_label.grid(row=5, column=0, padx=(20, 20), pady=(20, 0))
-            self.appearance_mode_optionemenu = customtkinter.CTkOptionMenu(self.frame_left, values=["Light", "Dark", "System"],
-                                                                           command=self.change_appearance_mode)
-            self.appearance_mode_optionemenu.grid(row=6, column=0, padx=(20, 20), pady=(10, 20))
-
-            # ============ frame_right ============
-
-            self.frame_right.grid_rowconfigure(1, weight=1)
-            self.frame_right.grid_rowconfigure(0, weight=0)
-            self.frame_right.grid_columnconfigure(0, weight=1)
-            self.frame_right.grid_columnconfigure(1, weight=0)
-            self.frame_right.grid_columnconfigure(2, weight=1)
-
-            self.map_widget = TkinterMapView(self.frame_right, corner_radius=0)
-            self.map_widget.grid(row=1, rowspan=1, column=0, columnspan=3, sticky="nswe", padx=(0, 0), pady=(0, 0))
-
-            # Set default values
-            self.map_widget.set_address(location)
-            self.map_option_menu.set("OpenStreetMap")
-            self.appearance_mode_optionemenu.set("Dark")
-
-        def set_marker_event(self):
-            current_position = self.map_widget.get_position()
-            self.marker_list.append(self.map_widget.set_marker(current_position[0], current_position[1]))
-
-        def clear_marker_event(self):
-            for marker in self.marker_list:
-                marker.delete()
-
-        def change_appearance_mode(self, new_appearance_mode: str):
-            customtkinter.set_appearance_mode(new_appearance_mode)
-
-        def change_map(self, new_map: str):
-            if new_map == "OpenStreetMap":
-                self.map_widget.set_tile_server("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png")
-            elif new_map == "Google normal":
-                self.map_widget.set_tile_server("https://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", max_zoom=22)
-            elif new_map == "Google satellite":
-                self.map_widget.set_tile_server("https://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}&s=Ga", max_zoom=22)
-
-        def on_closing(self, event=0):
-            self.destroy()
-
-        def start(self):
-            self.mainloop()
-
-    app = App()
-    app.start()
-
-create_map_app('rabat')

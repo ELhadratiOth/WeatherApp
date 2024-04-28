@@ -1,4 +1,6 @@
 import tkinter as tk
+import warnings
+
 import ipywidgets
 import seaborn
 import matplotlib
@@ -8,7 +10,7 @@ import customtkinter as ctk
 from PIL import Image, ImageTk
 import tkintermapview
 
-
+warnings.filterwarnings("ignore")
 def backgroundApp(root ,x , y ,image_path):
     image = Image.open(image_path)
     specified_width = x

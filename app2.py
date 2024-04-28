@@ -1,4 +1,6 @@
 import tkinter as tk
+import warnings
+
 import ipywidgets
 import seaborn
 import matplotlib
@@ -7,7 +9,7 @@ import folium
 import customtkinter as ctk
 from PIL import Image, ImageTk
 import tkintermapview
-
+warnings.filterwarnings("ignore")
 
 def backgroundApp(root ,x , y ,image_path):
     image = Image.open(image_path)
@@ -31,25 +33,17 @@ if __name__ == '__main__':
     root.mainloop()
 
     import customtkinter
-    from tkinter import Toplevel, Frame, Button, Label, OptionMenu
+    from tkinter import Toplevel
     from tkintermapview import TkinterMapView
 
 
-    def set_marker_event(map_widget, marker_list):
-        current_position = map_widget.get_position()
-        marker_list.append(map_widget.set_marker(current_position[0], current_position[1]))
 
 
-    def clear_marker_event(marker_list):
-        for marker in marker_list:
-            marker.delete()
-
-
-    def change_appearance_mode(new_appearance_mode):
+    def change_appearance_mode(new_appearance_mode:str):
         customtkinter.set_appearance_mode(new_appearance_mode)
 
 
-    def change_map(new_map, map_widget):
+    def change_map(new_map:str):
         if new_map == "OpenStreetMap":
             map_widget.set_tile_server("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png")
         elif new_map == "Google normal":
@@ -75,15 +69,6 @@ if __name__ == '__main__':
         frame_left.grid(row=0, column=0, padx=0, pady=0, sticky="nsew")
         frame_left.grid_rowconfigure(2, weight=1)
 
-        button_1 = customtkinter.CTkButton(master=frame_left,
-                                                text="Set Marker",
-                                                command=set_marker_event)
-        button_1.grid(pady=(20, 0), padx=(20, 20), row=0, column=0)
-
-        button_2 = customtkinter.CTkButton(master=frame_left,
-                                                text="Clear Markers",
-                                                command=clear_marker_event)
-        button_2.grid(pady=(20, 0), padx=(20, 20), row=1, column=0)
 
         map_label = customtkinter.CTkLabel(frame_left, text="Tile Server:", anchor="w")
         map_label.grid(row=3, column=0, padx=(20, 20), pady=(20, 0))
@@ -107,6 +92,7 @@ if __name__ == '__main__':
         frame_right.grid_columnconfigure(0, weight=1)
         frame_right.grid_columnconfigure(1, weight=0)
         frame_right.grid_columnconfigure(2, weight=1)
+        global map_widget
         map_widget = TkinterMapView(frame_right)
         map_widget.grid(row=1, rowspan=1, column=0, columnspan=3, sticky="nswe", padx=(0, 0), pady=(0, 0))
 
@@ -115,7 +101,7 @@ if __name__ == '__main__':
         map_option_menu.set("OpenStreetMap")
         appearance_mode_optionmenu.set("Dark")
 
-        top_level.mainloop()
+        return top_level
 
 
     # Exemple d'utilisation :

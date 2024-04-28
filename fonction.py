@@ -1,3 +1,5 @@
+import warnings
+
 import openmeteo_requests
 from geopy.geocoders import Nominatim
 from openmeteo_requests import Client
@@ -5,25 +7,20 @@ import requests_cache
 from retry_requests import retry
 from datetime import datetime
 import pandas as pd
+import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 import pytz
+import plotly.express as px
 
+warnings.filterwarnings("ignore")
 def get_current_time():
     return datetime.now().strftime("%I:%M %p")
 def get_current_weather(city_name):
     # Appel à l'API pour obtenir les coordonnées de la ville
     geocoder = Nominatim(user_agent="weather_app")
     location = geocoder.geocode(city_name)
-    l=location.raw['display_name']
-    print(l)
 
-    address_details = location.raw.get('address', {})
-
-    # Récupérer la région et le pays à partir des détails de l'adresse
-    region = address_details.get('state', '')
-    country = address_details.get('country', '')
-    print(region,country)
     if location:
         latitude = location.latitude
         longitude = location.longitude
@@ -41,7 +38,7 @@ def get_current_weather(city_name):
     params = {
         "latitude": latitude,
         "longitude": longitude,
-        "current": ["temperature_2m", "relative_humidity_2m", "weather_code", "cloud_cover", "pressure_msl",
+        "current": ["temperature_2m", "relative_humidity_2m", "is_day", "weather_code", "cloud_cover", "pressure_msl",
                     "wind_speed_10m"],
         "timezone": "auto"
     }
@@ -54,10 +51,11 @@ def get_current_weather(city_name):
     current = response.Current()
     current_temperature_2m = current.Variables(0).Value()
     current_relative_humidity_2m = current.Variables(1).Value()
-    current_weather_code = current.Variables(2).Value()
-    current_cloud_cover = current.Variables(3).Value()
-    current_pressure_msl = current.Variables(4).Value()
-    current_wind_speed_10m = current.Variables(5).Value()
+    current_is_day = current.Variables(2).Value()
+    current_weather_code = current.Variables(3).Value()
+    current_cloud_cover = current.Variables(4).Value()
+    current_pressure_msl = current.Variables(5).Value()
+    current_wind_speed_10m = current.Variables(6).Value()
 
     current_time = current.Time()
 
@@ -67,6 +65,7 @@ def get_current_weather(city_name):
         "Current Time": [current_time],
         "Temperature": [current_temperature_2m],
         "Humidity": [current_relative_humidity_2m],
+        "isDay": [current_is_day],
         "Weather Code": [current_weather_code],
         "Cloud": [current_cloud_cover],
         "Pressure": [current_pressure_msl],
@@ -128,24 +127,45 @@ def get_daily_weather_forecast(city_name):
     return daily_dataframe
 
 
-def outputCurrentT(lastT, code_lastT):
+def outputCurrentT(lastT, code_lastT,isday):
     img = ""
     if int(code_lastT) == 0:
-        img = "./static/1.png"
+        if isday == 0 :
+            img = "./static/1n.png"
+        else :
+            img = "./static/1.png"
     elif int(code_lastT) in [1, 2, 3]:
-        img = "./static/2.png"
+        if isday == 0 :
+            img = "./static/2n.png"
+        else :
+            img = "./static/2.png"
     elif int(code_lastT) in [56, 67, 51, 53, 55, 45, 48]:
-        img = "./static/3.png"
+        if isday == 0 :
+            img = "./static/3n.png"
+        else :
+            img = "./static/3.png"
     elif int(code_lastT) in [61, 63, 65]:
-        img = "./static/4.png"
+        if isday == 0:
+            img = "./static/4n.png"
+        else:
+            img = "./static/4.png"
     elif int(code_lastT) in [66, 67]:
-        img = "./static/6710.png"
+         img = "./static/6710.png"
     elif int(code_lastT) in [71, 73]:
-        img = "./static/5.png"
+        if isday == 0:
+            img = "./static/5n.png"
+        else:
+            img = "./static/5.png"
     elif int(code_lastT) in [75, 77]:
-        img = "./static/911.png"
+        if isday == 0:
+            img = "./static/911n.png"
+        else:
+            img = "./static/911.png"
     elif int(code_lastT) in [80, 81, 82, 85, 86]:
-        img = "./static/8.png"
+        if isday == 0:
+            img = "./static/8n.png"
+        else:
+            img = "./static/8.png"
 
     return img
 
@@ -193,22 +213,12 @@ def get_weather_data(city_name):
     hourly_dataframe = pd.DataFrame(data=hourly_data)
     return hourly_dataframe
 
-def update_temperature_unit(value):
-    print("Temperature Unit:", value)
 
-def update_pressure_unit(value):
-    print("Pressure Unit:", value)
-
-def update_wind_speed_unit(value):
-    print("Wind Speed Unit:", value)
-
-def update_time_format(value):
-    print("Time Format:", value)
 
 # Graphique de variation de la température par heure
-"""hourly_data = get_weather_data("fes")
+hourly_data = get_weather_data("fes")
 
-hours = np.array(hourly_data["hour"])
+"""hours = np.array(hourly_data["hour"])
 temperatures = np.array(hourly_data['temperature'])
 
 fig, ax1 = plt.subplots(figsize=(10, 6))
@@ -233,4 +243,24 @@ fig.tight_layout()
 plt.title('Hourly Temperature Forecast', color='green', fontsize=14)
 plt.show()"""
 
-get_current_weather('lome')
+def variation_tmp(city_name):
+    hourly_data = get_weather_data(city_name)
+    fig = px.bar(hourly_data, x='hour', y='temperature',
+                 color='rain',
+                 color_continuous_scale='Viridis', title='TEMPERATURE VARIATION',text="temperature",
+                 labels={'temperature': 'Temperature (° C)','hour':'Hours','rain':"Rain"}
+    )
+
+    fig.update_layout(
+        xaxis=dict(showgrid=True,tickfont=dict(size=15)),
+        yaxis=dict(showgrid=True,tickfont=dict(size=15)),
+        title_font=dict(size=40),
+        yaxis_title_font=dict(size=30), # Taille de la police pour l'axe des y
+        xaxis_title_font=dict(size=30),
+        #colorway=dict(title=dict(font=dict(size=14))),
+        plot_bgcolor='#132530'
+    )
+
+    return fig
+
+#print(hourly_data)
