@@ -365,7 +365,7 @@ aqiButtun = ctk.CTkButton(currentW , image= my_image ,text="AQI "+ str(AirData[0
                                   width=100 , height=34  , font=('Mountain' ,25 ) , command=open_toplevel ,  compound="left")
 aqiButtun.place(x=137 , y=170)
 
-moreD = ctk.CTkButton(root , width=200 , height=40 , text="GET MORE DETAILS" ,font=('Mountain' ,35 ) ,  bg_color='#05141e'  , fg_color='#04303f' ,hover_color='#001a1a' ,border_width=3, border_color="#000000" , anchor='se' , corner_radius=23  , command=open_toplevel_details)
+moreD = ctk.CTkButton(root , width=200 , height=40 , text="GET MORE DETAILS" ,font=('Mountain' ,35 ) ,  bg_color='#05141e'  , fg_color='#04303f' ,hover_color='#001a1a' ,border_width=3, border_color="#000000" , anchor='se' , corner_radius=23  , command=None)
 moreD.place(x=945 , y= 357)
 
 
