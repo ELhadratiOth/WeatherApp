@@ -100,17 +100,17 @@ def create_toplevel_window():
     frameTop = ctk.CTkFrame(toplevel_window, width=340, height=240, bg_color='#091c25', fg_color='#091c25',
                             corner_radius=30)
     frameTop.place(x=30, y=27)
-    airQ = ctk.CTkLabel(frameTop, width=100, height=15, text='Air Quality Index', font=('Davish Medium', 35))
+    airQ = ctk.CTkLabel(frameTop, width=100, height=19, text='Air Quality Index', font=('Davish Medium', 35))
     airQ.place(x=10, y=0)
     airPdetail = ctk.CTkLabel(frameTop, width=100, height=15, text= city+ 'Published at '+ AirData[9],
                               font=('Davish Medium', 20))
-    airPdetail.place(x=10, y=43)
+    airPdetail.place(x=10, y=46)
     aqiVal = ctk.CTkLabel(frameTop, width=100, height=15, text=AirData[0], font=('Davish Medium', 65), text_color=AirData[11])
     aqiVal.place(x=-12, y=70)
     typelabel = ctk.CTkLabel(frameTop, height=15, text=AirData[7], font=('Davish Medium', 25), text_color=AirData[11])
     typelabel.place(x=70, y=102)
     massagelabel = ctk.CTkLabel(frameTop, height=15, text=AirData[8],
-                                font=('Davish Medium', 15))
+                                font=('Davish Medium', 17))
     massagelabel.place(x=10, y=142)
     # block1
     framBolock1 = ctk.CTkFrame(frameTop, width=50, height=50 , bg_color='#091c25' ,  fg_color='#091c25')
@@ -164,6 +164,18 @@ def open_toplevel():
         toplevel_window = create_toplevel_window()  # Create the window if it's None or destroyed
     else:
         toplevel_window.focus()
+
+def create_toplevel_window_details():
+    app_t.commandGetMoreDetails(city)
+
+def open_toplevel_details():
+    global toplevel_window
+    if toplevel_window is None or not toplevel_window.winfo_exists():
+        toplevel_window = create_toplevel_window_details()
+    else:
+        toplevel_window.focus()
+
+
 
 latitude, longitude , region , city = function.actuall_dataCompli()
 lastT , img  = function.outputCurrentT(latitude, longitude)
@@ -353,7 +365,7 @@ aqiButtun = ctk.CTkButton(currentW , image= my_image ,text="AQI "+ str(AirData[0
                                   width=100 , height=34  , font=('Mountain' ,25 ) , command=open_toplevel ,  compound="left")
 aqiButtun.place(x=137 , y=170)
 
-moreD = ctk.CTkButton(root , width=200 , height=40 , text="GET MORE DETAILS" ,font=('Mountain' ,35 ) ,  bg_color='#05141e'  , fg_color='#04303f' ,hover_color='#001a1a' ,border_width=3, border_color="#000000" , anchor='se' , corner_radius=23  , command=None)
+moreD = ctk.CTkButton(root , width=200 , height=40 , text="GET MORE DETAILS" ,font=('Mountain' ,35 ) ,  bg_color='#05141e'  , fg_color='#04303f' ,hover_color='#001a1a' ,border_width=3, border_color="#000000" , anchor='se' , corner_radius=23  , command=open_toplevel_details)
 moreD.place(x=945 , y= 357)
 
 
