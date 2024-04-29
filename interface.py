@@ -193,7 +193,10 @@ root.title("Weather App")
 root.geometry("1300x700")
 root.resizable(height=False, width=False)
 app.backgroundApp(root,1300 , 700,'./static/bg.psd')
-
+#icon de l'application
+icon_path = "./static/loupe.png"
+icon_image = tk.PhotoImage(file=icon_path)
+root.iconphoto(True, icon_image)
 
 
 barFrame = ctk.CTkFrame(root,width=500 , height=60  )
@@ -312,6 +315,7 @@ currentWlabel44 = ctk.CTkLabel(elem3 , text=dataDic['time'][2].split('T')[1],hei
 currentWlabel44.place(relx=0.3 , rely=0.75)
 
 #elem4
+
 my_image=ImagAdd(dataDic['img'][3] , 60)
 elem4 = ctk.CTkLabel(container , image=my_image, text="",width=120 , height=170 , bg_color='#263138')
 elem4.place(x=435,y=36)
