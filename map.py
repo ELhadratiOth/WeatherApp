@@ -51,7 +51,6 @@ def create_map_app(location):
     # Set default values
     map_widget.set_address(location)
     map_option_menu.set("OpenStreetMap")
-    appearance_mode_optionmenu.set("Dark")
 
     return top_level
 

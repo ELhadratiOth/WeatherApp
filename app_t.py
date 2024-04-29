@@ -145,7 +145,7 @@ def getMoreDetails(city_name):
     forecast_label = tk.Label(forecast_title_frame, text="Forecast", fg="white", bg="#1a1a1a",
                               font=("Helvetica", 14, "bold"))
     forecast_label.pack(pady=5, padx=5, side="left")
-    label_7 = tk.Label(forecast_title_frame, text="6 days", font=("Helvetica", 10), fg="white", bg="red")
+    label_7 = tk.Label(forecast_title_frame, text="6 days", font=("Helvetica", 10), fg="white", bg="#1a1a1a")
     label_7.pack(side=tk.LEFT, padx=90, pady=(0, 5))
 
     daily_data = fonction.get_daily_weather_forecast(city_name)
@@ -178,11 +178,10 @@ def getMoreDetails(city_name):
         date_label = tk.Label(day_frame, text=row["date"], fg="white", bg="#132530", font=("Helvetica", 10, "bold"))
         date_label.pack(pady=5, padx=30, side="left")
 
-    setting_title_frame = tk.Frame(frame5, bg="#1a1a1a", width=120, height=30)
-    setting_title_frame.pack_propagate(0)
-    setting_title_frame.place(x=0, y=0)
-    setting_label = tk.Label(setting_title_frame, text="Settings", fg="white", bg="#1a1a1a", font=("Helvetica", 16, "bold"))
+
+    setting_label = ctk.CTkLabel(frame5, text="Settings", width=100,height=30,corner_radius=15,fg_color="#1a1a1a", bg_color="#132530", font=("Helvetica", 16, "bold"))
     setting_label.pack(pady=(10, 0), padx=5, side="left")
+    setting_label.place(x=0,y=0)
 
     # Options pour les unités
     temp_options = ["Celsius °C", "Fahrenheit °F"]
