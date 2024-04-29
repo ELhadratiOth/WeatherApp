@@ -194,7 +194,7 @@ root.geometry("1300x700")
 root.resizable(height=False, width=False)
 app.backgroundApp(root,1300 , 700,'./static/bg.psd')
 #icon de l'application
-icon_path = "./static/loupe.png"
+icon_path = "./static/8n.png"
 icon_image = tk.PhotoImage(file=icon_path)
 root.iconphoto(True, icon_image)
 

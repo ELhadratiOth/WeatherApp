@@ -43,7 +43,7 @@ def getMoreDetails(city_name):
     #top.attributes('-fullscreen', True)
     top.geometry("1300x700")
     top.resizable(0, 0)
-    icon_path = "./static/loupe.png"
+    icon_path = "./static/8n.png"
     image_path="./static/bcopie.psd"
     icon_image = tk.PhotoImage(file=icon_path)
 
