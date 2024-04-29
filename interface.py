@@ -9,27 +9,27 @@ from geopy import Nominatim
 import app_t
 airPdetail, aqiVal, typelabel, massagelabel, elem11, elem12, elem13, elem14, elem15, elem16  , city  = ("",) * 11
 
-
 def getLocation():
     if len(searchBar.get()) == 0 :
         messagebox.showerror(title='No city Typed', message="try to type the name of a city ")
         searchBar.focus_force() 
     else :
-        print(searchBar.get())
+        # print(searchBar.get())
         geocoder = Nominatim(user_agent="weather_app")
         location = geocoder.geocode(searchBar.get())
-        print(list(location))
+        # print(list(location))
         global  AirData , city 
         if location:
+            global LOCAL_Seconds
             latitude = location.latitude
             longitude = location.longitude
             lastT, img = function.outputCurrentT(latitude, longitude)
             dataDic = function.setImg(latitude, longitude)
-
+            LOCAL_Seconds = dataDic['time_local']
             AirData = function.AirDetails(latitude, longitude)
 
             villeLabel.configure(text=searchBar.get() )
-            print(location.address)
+            # print(location.address)
             paysLabel.configure(text=location.address.split()[-1])
             my_image = ImagAdd(img, 100)
             currentWlabel11.configure(image=my_image)
@@ -82,11 +82,12 @@ def getLocation():
 
 
 def updatetimer():
-    exactTime = time.strftime("%I.%M.%S %p")
+    current_utc_time = time.gmtime(time.time() + LOCAL_Seconds )
+    exactTime = time.strftime("%I.%M.%S %p", current_utc_time)
     clockLabel.configure(text=exactTime)
-    exactDate= time.strftime("%A . %B . %d , %Y")
+    exactDate = time.strftime("%A . %B . %d , %Y", time.gmtime())
     dateLabel.configure(text=exactDate)
-    root.after(1000,updatetimer)
+    root.after(1000, updatetimer)
 def ImagAdd(img , size):
     my_image = ctk.CTkImage(light_image=Image.open(img),
                                       size=(size, size))
@@ -184,6 +185,7 @@ latitude, longitude , region , city = function.actuall_dataCompli()
 lastT , img  = function.outputCurrentT(latitude, longitude)
 dataDic=function.setImg(latitude, longitude)
 AirData=function.AirDetails(latitude, longitude)
+LOCAL_Seconds = dataDic['time_local']
 
 toplevel_window = None
 
@@ -365,14 +367,13 @@ forcast  = ctk.CTkLabel(forcastFrame , text="24-hour forecast" , bg_color='#0615
                                   width=105 , height=25  , font=('Mountain' ,24 ))
 forcast.place(x=13 , y=6)
 my_image    =  ImagAdd("./static/air-quality.png", 24)
-aqiButtun = ctk.CTkButton(currentW , image= my_image ,text="AQI "+ str(AirData[0]) , bg_color='#263138' , fg_color='#06151e'
+aqiButtun = ctk.CTkButton(currentW , image= my_image ,text="AQI "+ str(AirData[0]) , bg_color='#263138' , fg_color='#04303f'
                                 ,border_width=2 , corner_radius=10 , border_color='#000000',
                                   width=100 , height=34  , font=('Mountain' ,25 ) , command=open_toplevel ,  compound="left")
 aqiButtun.place(x=137 , y=170)
 
 moreD = ctk.CTkButton(root , width=200 , height=40 , text="GET MORE DETAILS" ,font=('Mountain' ,35 ) ,  bg_color='#05141e'  , fg_color='#04303f' ,hover_color='#001a1a' ,border_width=3, border_color="#000000" , anchor='se' , corner_radius=23  , command=create_toplevel_window_details)
 moreD.place(x=945 , y= 357)
-
 
 root.mainloop()
 
