@@ -43,7 +43,7 @@ def getMoreDetails(city_name):
     #top.attributes('-fullscreen', True)
     top.geometry("1300x700")
     top.resizable(0, 0)
-    icon_path = "./static/8n.png"
+    icon_path = "./static/loupe.png"
     image_path="./static/bcopie.psd"
     icon_image = tk.PhotoImage(file=icon_path)
 
@@ -72,7 +72,8 @@ def getMoreDetails(city_name):
     frame5.pack_propagate(0)  # Empêche le cadre de redimensionner son contenu
     frame5.place(x=1100, y=60)
     def ImagAdd(img , size):
-        my_image = ctk.CTkImage(light_image=Image.open(img), size=(size, size))
+        my_image = ctk.CTkImage(light_image=Image.open(img),
+                                          size=(size, size))
         return my_image
 
     #Affichage current informations
@@ -81,6 +82,8 @@ def getMoreDetails(city_name):
     my_label.pack(pady=0)
     my_widget = tkintermapview.TkinterMapView(my_label, width=600, height=250, corner_radius=0)
     my_widget.place(x=0, y=0)
+    # set cordinates
+    # my_widget.set_position(12.7,-5.67)
     # set current widget position by address
     marker_1 = my_widget.set_address(city_name, marker=True)
 
@@ -156,7 +159,7 @@ def getMoreDetails(city_name):
     forecast_label = tk.Label(forecast_title_frame, text="Forecast", fg="white", bg="#1a1a1a",
                               font=("Helvetica", 14, "bold"))
     forecast_label.pack(pady=5, padx=5, side="left")
-    label_7 = tk.Label(forecast_title_frame, text="6 days", font=("Helvetica", 10), fg="white", bg="#1a1a1a")
+    label_7 = tk.Label(forecast_title_frame, text="6 days", font=("Helvetica", 10), fg="white", bg="red")
     label_7.pack(side=tk.LEFT, padx=90, pady=(0, 5))
 
     daily_data = fonction.get_daily_weather_forecast(city_name)
