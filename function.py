@@ -1,5 +1,3 @@
-import json
-from urllib.request import urlopen
 import requests
 
 def getCurrentLocation(latitude, longitude):
@@ -7,7 +5,7 @@ def getCurrentLocation(latitude, longitude):
     getting_weather= requests.get(weatherApiUrl)
     currentWeather = getting_weather.json()
     print(currentWeather)
-    print('getCurrentLocation')
+    # print('getCurrentLocation')
     return currentWeather
 
 
@@ -17,14 +15,16 @@ def oganiseData(latitude, longitude):
     tmp = currentWeather['hourly']['temperature_2m'][::4]
     tmp_code = currentWeather['hourly']['weather_code'][::4]
     is_day= currentWeather['hourly']['is_day'][::4]
-    print(tmp_code)
+    time_local = currentWeather['utc_offset_seconds']
+    # print(tmp_code)
     dataDic = {
         'time': time ,
         'tmp': tmp ,
         'tmp_code': tmp_code ,
-        'is_day' : is_day
+        'is_day' : is_day ,
+        'time_local' : time_local
     }
-    print('oganiseData')
+    # print('oganiseData')
 
     return dataDic
 
@@ -71,43 +71,43 @@ def setImg( latitude, longitude):
             else :
                 img.append("./static/8.png")
     dataDic['img']= img
-    print(img)
-    print('setImg')
+    # print(img)
+    # print('setImg')
 
     return dataDic
 
 def actuall_dataCompli():
-    url="http://ipinfo.io/json"
-    response = urlopen(url)
-    data = json.load(response)
-    print(data)
-    latitude=data['loc'].split(',')[0]
-    longitude=data['loc'].split(',')[1]
+    url = "http://ipinfo.io/json"
+    response = requests.get(url)
+    data = response.json()
+    # print(data)
+    latitude = data['loc'].split(',')[0]
+    longitude = data['loc'].split(',')[1]
     region = data['region']
     city = data['city']
-    return latitude , longitude , region , city
+    return latitude, longitude, region, city
 def getCurrentWeather(latitude, longitude):
     weatherApiUrl = f"https://api.open-meteo.com/v1/dwd-icon?latitude={latitude}&longitude={longitude}&current=temperature_2m,is_day,weather_code&timezone=auto"
 
     getting_weather= requests.get(weatherApiUrl)
     if getting_weather.status_code == 200:
         currentWeather = getting_weather.json()
-        print(currentWeather)
+        # print(currentWeather)
         lastT = currentWeather['current']['temperature_2m']
         code_lastT = currentWeather['current']['weather_code']
         is_day = currentWeather['current']['is_day']
 
         return lastT , code_lastT , is_day
     else :
-            print("error de connexion")
+            # print("error de connexion")
             return
 
 
 def outputCurrentT(latitude, longitude):
     img = ""
     lastT , code_lastT , isday  = getCurrentWeather(latitude, longitude)
-    print(code_lastT)
-    print(lastT)
+    # print(code_lastT)
+    # print(lastT)
     if int(code_lastT) == 0:
         if isday == 0 :
             img = "./static/1n.png"
@@ -166,7 +166,7 @@ def AirDetails(latitude, longitude):
     weatherApiUrl = f"https://air-quality-api.open-meteo.com/v1/air-quality?latitude={latitude}&longitude={longitude}&current=european_aqi,us_aqi,pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,ozone&timezone=auto&forecast_days=1"
     getting_weather= requests.get(weatherApiUrl)
     currentWeather = getting_weather.json()
-    print(currentWeather)
+    # print(currentWeather)
     aqi = int( (currentWeather['current']['european_aqi'] + currentWeather['current']['us_aqi']) / 2 )
 
     pm10 = currentWeather['current']['pm10']
