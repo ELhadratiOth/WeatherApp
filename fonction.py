@@ -1,4 +1,3 @@
-import warnings
 
 import openmeteo_requests
 from geopy.geocoders import Nominatim
@@ -7,13 +6,9 @@ import requests_cache
 from retry_requests import retry
 from datetime import datetime
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-import numpy as np
-import pytz
 import plotly.express as px
 
-warnings.filterwarnings("ignore")
+
 def get_current_time():
     return datetime.now().strftime("%I:%M %p")
 def get_current_weather(city_name):

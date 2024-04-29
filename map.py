@@ -1,10 +1,8 @@
-import warnings
+
 from tkinter import Toplevel
 import app2
 import customtkinter
 from tkintermapview import TkinterMapView
-# import cartography as ct
-warnings.filterwarnings("ignore")
 customtkinter.set_default_color_theme("blue")
 
 def change_map(new_map: str):

@@ -5,24 +5,10 @@ import tkintermapview
 import fonction
 import app2
 import map
-import ipywidgets
-import seaborn
-import matplotlib
-import geopy
-import folium
 import customtkinter as ctk
 from PIL import Image, ImageTk
 import plotly.io as pio
-import warnings
-# import cartography as ct
-import plotly.graph_objs as go
-from plotly.io import to_html
-from tkinterhtml import HtmlFrame
-
-warnings.filterwarnings("ignore")
 CONST_FAHRENHEIT=32
-from tkintermapview import TkinterMapView
-
 customtkinter.set_default_color_theme("blue")
 city_names=""
 # Initialisation de la fenêtre
