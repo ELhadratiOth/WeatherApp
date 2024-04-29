@@ -361,7 +361,7 @@ currentWlabel27.place(relx=0.2, rely=0.058)
 currentWlabel3 = ctk.CTkLabel(frameTT , text="o"  ,height=1  , bg_color='#06151e'  ,font=('Mountain' ,15 )  )
 currentWlabel3.place(relx=0.8 , rely=0.1)
 currentWlabel47 = ctk.CTkLabel(elem6 , text=dataDic['time'][5].split('T')[1] ,height=30  , bg_color='#263138'
-                              ,font=('Mountain' ,35 ) )
+                              ,font=('Mountain' ,35) )
 currentWlabel47.place(relx=0.3 , rely=0.75)
 
 forcastFrame =ctk.CTkFrame(root , width=180 , height=40  ,  border_width=3 , border_color="#000000" ,   corner_radius=30 , fg_color='#06151e' , bg_color='#263138'  )
