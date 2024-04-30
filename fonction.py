@@ -203,41 +203,15 @@ def get_weather_data(city_name):
             inclusive="left"
         ).strftime("%H:%M")
     }
-    hourly_data["temperature"] = hourly_temperature_2m
+    hourly_data["temperature"] =  [ round(elem,2) for elem in hourly_temperature_2m]
     hourly_data["rain"] = hourly_rain
     hourly_dataframe = pd.DataFrame(data=hourly_data)
+    print( hourly_dataframe)
     return hourly_dataframe
 
 
 
 # Graphique de variation de la température par heure
-hourly_data = get_weather_data("fes")
-
-"""hours = np.array(hourly_data["hour"])
-temperatures = np.array(hourly_data['temperature'])
-
-fig, ax1 = plt.subplots(figsize=(10, 6))
-
-color = 'tab:blue'
-ax1.set_facecolor('white')  # Noir pour le background
-ax1.set_xlabel('Hours', color='black', fontsize=12)
-ax1.set_ylabel('Temperature (°C)', color='black', fontsize=12)
-ax1.plot(hours, temperatures, color=color)
-ax1.tick_params(axis='y', labelcolor=color)
-
-# Affichage des valeurs de température sur la courbe
-for i, temp in enumerate(temperatures):
-    ax1.text(hours[i], temp, f"{temp}°", ha='center', va='bottom', fontsize=8, color='white')
-
-ax1.grid(True, linestyle='--', linewidth=0.5, color='black', alpha=0.5)
-
-ax1.set_xticks(np.arange(0, len(hours), 3))
-ax1.set_xticklabels(hours[::3], rotation=45, color='black')
-
-fig.tight_layout()
-plt.title('Hourly Temperature Forecast', color='green', fontsize=14)
-plt.show()"""
-
 def variation_tmp(city_name):
     hourly_data = get_weather_data(city_name)
     fig = px.bar(hourly_data, x='hour', y='temperature',

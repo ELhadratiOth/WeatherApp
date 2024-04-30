@@ -210,14 +210,17 @@ def getMoreDetails(city_name):
                 for _ in icon_values.columns:
                     for val in liste_value_label:
                         if k==2:
-                            val.config(text=f"{float(l[_])+0.001}")
+                            print(f"ffff{int(l[_])}")
+
+                            val.config(text=f" efwefwef{float(l[_])*0.001}")
 
         elif  new_value=="hPa":
             for k, l in icon_values.iterrows():
                 for _ in icon_values.columns:
                     for val in liste_value_label:
                         if k==2:
-                            val.config(text=f"{int(l[_])}")
+                            print(f"ddddd{int(l[_])}")
+                            val.config(text=f"ddddd{int(l[_])}")
 
 
 
@@ -228,13 +231,17 @@ def getMoreDetails(city_name):
                 for p in icon_values.columns:
                     for val in liste_value_label:
                         if m==3:
-                            value_label.config(text=f"{int(n[p])}")
+                            print(f"vvvvv{int(n[p])}")
+
+                            val.config(text=f"{int(n[p])}")
         elif new_value == "m/s":
             for m, n in icon_values.iterrows():
                 for p in icon_values.columns:
                     for val in liste_value_label:
                         if m==3:
-                            value_label.config(text=f"{float(n[p])+0.28}")
+                            print(f"bvcxbvc{int(n[p])}")
+
+                            val.config(text=f"{float(n[p])*0.28}")
     # Labels et menus déroulants pour les unités
     temperature_unit_label = tk.Label(frame5, text="Temperature Unit:", fg="white", bg="#132530",
                                       font=("Helvetica", 10, "bold"))
