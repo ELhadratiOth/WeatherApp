@@ -3,7 +3,7 @@ import tkinter as tk
 import customtkinter
 import tkintermapview
 import fonction
-import app2
+import app
 import map
 import customtkinter as ctk
 from PIL import Image, ImageTk
@@ -20,6 +20,11 @@ def open_full_map():
         toplevel_window = map.create_map_app(city_names)  # Create the window if it's None or destroyed
     else:
         toplevel_window.focus()
+#fonction pour resisze les icones
+def ImagAdd(img , size):
+        my_image = ctk.CTkImage(light_image=Image.open(img),
+                                          size=(size, size))
+        return my_image
 
 def getMoreDetails(city_name):
     global city_names
@@ -37,7 +42,7 @@ def getMoreDetails(city_name):
     toplevel_window.destroy()
     top.iconphoto(True, icon_image)
     # Appliquer l'image de fond
-    app2.backgroundApp(top,1300,700,image_path)
+    app.backgroundApp(top,1300,700,image_path)
     frame1 = tk.Frame(top, bg="#132530", width=340, height=250)
     frame1.pack_propagate(0)  # Empêche le cadre de redimensionner son contenu
     frame1.place(x=100, y=60)
@@ -57,10 +62,6 @@ def getMoreDetails(city_name):
     frame5 = tk.Frame(top, bg="#132530", width=120, height=250)
     frame5.pack_propagate(0)  # Empêche le cadre de redimensionner son contenu
     frame5.place(x=1100, y=60)
-    def ImagAdd(img , size):
-        my_image = ctk.CTkImage(light_image=Image.open(img),
-                                          size=(size, size))
-        return my_image
 
     #Affichage current informations
 
@@ -68,8 +69,6 @@ def getMoreDetails(city_name):
     my_label.pack(pady=0)
     my_widget = tkintermapview.TkinterMapView(my_label, width=600, height=250, corner_radius=0)
     my_widget.place(x=0, y=0)
-    # set cordinates
-    # my_widget.set_position(12.7,-5.67)
     # set current widget position by address
     marker_1 = my_widget.set_address(city_name, marker=True)
 
