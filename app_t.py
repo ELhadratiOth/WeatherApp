@@ -134,11 +134,10 @@ def getMoreDetails(city_name):
     liste_value_label=[]
     for index, row in icon_values.iterrows():
         for icon in icon_values.columns:
-            value_label = tk.Label(value_frame, text=f"{(int(row[icon]))}", font=("Helvetica", 12, "bold"), fg="white",
+            value_label = tk.Label(value_frame, text=str(int(row[icon])), font=("Helvetica", 12, "bold"), fg="white",
                                    bg="#132530")
             value_label.pack(side=tk.LEFT, padx=20, pady=(0, 5))
-            if icon=="Pressure" or icon=="Wind Speed":
-                liste_value_label.append(value_label)
+            liste_value_label.append(value_label)
 
     forecast_title_frame = ctk.CTkFrame(frame3, fg_color="#1a1a1a", bg_color="transparent",width=400, height=40,corner_radius=33)
     forecast_title_frame.pack_propagate(0)
@@ -208,34 +207,41 @@ def getMoreDetails(city_name):
     def update_pressure_unit(new_value:str):
         if new_value == "bar":
             for k, l in icon_values.iterrows():
-                for col in icon_values.columns:
-                    if col=="Pressure":
-                        liste_value_label[0].config(text=f"{int(l[col]*0.001)}")
-                        break
+                for _ in icon_values.columns:
+                    for val in liste_value_label:
+                        if k==2:
+                            print(f"ffff{int(l[_])}")
+
+                            val.config(text=f" efwefwef{float(l[_])*0.001}")
 
         elif  new_value=="hPa":
             for k, l in icon_values.iterrows():
-                for col in icon_values.columns:
-                    if col=="Pressure":
-                        liste_value_label[0].config(text=f"{int(l[col])}")
-                        break
+                for _ in icon_values.columns:
+                    for val in liste_value_label:
+                        if k==2:
+                            print(f"ddddd{int(l[_])}")
+                            val.config(text=f"ddddd{int(l[_])}")
 
 
 
 
     def update_wind_speed_unit(new_value:str):
-        if new_value == "km/h":
+        if new_value == "Km/h":
             for m, n in icon_values.iterrows():
                 for p in icon_values.columns:
-                    if p=="Wind Speed":
-                        liste_value_label[1].config(text=f"{int(n[p])}")
-                        break
+                    for val in liste_value_label:
+                        if m==3:
+                            print(f"vvvvv{int(n[p])}")
+
+                            val.config(text=f"{int(n[p])}")
         elif new_value == "m/s":
             for m, n in icon_values.iterrows():
                 for p in icon_values.columns:
-                    if p=="Wind Speed":
-                        liste_value_label[1].config(text=f"{int(n[p]/3.6)}")
-                        break
+                    for val in liste_value_label:
+                        if m==3:
+                            print(f"bvcxbvc{int(n[p])}")
+
+                            val.config(text=f"{float(n[p])*0.28}")
     # Labels et menus déroulants pour les unités
     temperature_unit_label = tk.Label(frame5, text="Temperature Unit:", fg="white", bg="#132530",
                                       font=("Helvetica", 10, "bold"))

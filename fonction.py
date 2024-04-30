@@ -203,18 +203,15 @@ def get_weather_data(city_name):
             inclusive="left"
         ).strftime("%H:%M")
     }
-    hourly_data["temperature"] =hourly_temperature_2m
+    hourly_data["temperature"] =  [ round(elem,2) for elem in hourly_temperature_2m]
     hourly_data["rain"] = hourly_rain
     hourly_dataframe = pd.DataFrame(data=hourly_data)
+    print( hourly_dataframe)
     return hourly_dataframe
 
 
 
 # Graphique de variation de la température par heure
-hourly_data = get_weather_data("fes")
-
-
-
 def variation_tmp(city_name):
     hourly_data = get_weather_data(city_name)
     fig = px.bar(hourly_data, x='hour', y='temperature',
