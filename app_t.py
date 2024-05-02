@@ -96,7 +96,7 @@ def getMoreDetails(city_name):
     jour = int(data["isDay"])
 
     weather_image_path = fonction.outputCurrentT(lastT, code_lastT, jour)  # Remplacer par le chemin de votre image météo
-    print(weather_image_path)
+    # print(weather_image_path)
     resized_img=ImagAdd(weather_image_path,80)
     #weather_image = tk.PhotoImage(file=weather_image_path)
 
@@ -265,7 +265,7 @@ def getMoreDetails(city_name):
     # Convertissez les octets en une image tkinter
     img = Image.open(io.BytesIO(img_bytes))
     width_img, height_img = img.size
-    print(width_img,height_img)
+    # print(width_img,height_img)
     max_width = 800  # Largeur maximale du cadre
     max_height = 290  # Hauteur maximale du cadre
     resize_factor = min(max_width / width_img, max_height / height_img)

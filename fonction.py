@@ -206,7 +206,6 @@ def get_weather_data(city_name):
     hourly_data["temperature"] =  [ round(elem,2) for elem in hourly_temperature_2m]
     hourly_data["rain"] = hourly_rain
     hourly_dataframe = pd.DataFrame(data=hourly_data)
-    print( hourly_dataframe)
     return hourly_dataframe
 
 

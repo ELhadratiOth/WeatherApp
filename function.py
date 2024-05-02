@@ -4,7 +4,7 @@ def getCurrentLocation(latitude, longitude):
     weatherApiUrl = f"https://api.open-meteo.com/v1/dwd-icon?latitude={latitude}&longitude={longitude}&hourly=temperature_2m,weather_code,is_day&timezone=auto&forecast_hours=24"
     getting_weather= requests.get(weatherApiUrl)
     currentWeather = getting_weather.json()
-    print(currentWeather)
+    # print(currentWeather)
     # print('getCurrentLocation')
     return currentWeather
 
@@ -168,7 +168,6 @@ def AirDetails(latitude, longitude):
     currentWeather = getting_weather.json()
     # print(currentWeather)
     aqi = int( (currentWeather['current']['european_aqi'] + currentWeather['current']['us_aqi']) / 2 )
-
     pm10 = currentWeather['current']['pm10']
     pm2_5 = currentWeather['current']['pm2_5']
     carbon_monoxide = currentWeather['current']['carbon_monoxide']
