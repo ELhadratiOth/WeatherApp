@@ -1,6 +1,6 @@
 
 from tkinter import Toplevel
-import app2
+import app
 import customtkinter
 from tkintermapview import TkinterMapView
 customtkinter.set_default_color_theme("blue")
@@ -18,7 +18,7 @@ def create_map_app(location):
     top_level.title("Full map")
     top_level.geometry("800x500")
     top_level.minsize(800, 500)
-    app2.backgroundApp(top_level, 800, 500, "./static/bgmap.psd")
+    app.backgroundApp(top_level, 800, 500, "./static/bgmap.psd")
     top_level.grid_columnconfigure(0, weight=0)
     top_level.grid_columnconfigure(1, weight=1)
     top_level.grid_rowconfigure(0, weight=1)
