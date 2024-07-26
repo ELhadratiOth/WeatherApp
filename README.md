@@ -8,9 +8,6 @@ This project is a web application for simulating weather conditions. It utilizes
 - User-friendly interface for easy interaction
 - Provides insights into weather patterns and forecasts
 
-## Online Access
-
-You can access the Weather Simulator online [here](https://weather-simulator-example.com/)
 
 ## Installation
 
